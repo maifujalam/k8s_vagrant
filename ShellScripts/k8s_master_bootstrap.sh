@@ -21,7 +21,7 @@ printf "\nInstalling Tigera Operator for Calico CNI...\n\n"
   su - vagrant -c 'kubectl create namespace tigera-operator'
 
 printf "\nInstalling Tigera Operator for Calico CNI...\n\n"
-  su - vagrant -c 'helm install calico tigera-operator --version v3.26.1 -f /vagrant/manifests/tigera-operator/values.yaml --namespace tigera-operator'
+  su - vagrant -c 'helm install calico /vagrant/manifests/tigera-operator -f /vagrant/manifests/tigera-operator/values.yaml --namespace tigera-operator'
 
 printf "\nInstalling Calico CNI with VXLAN...\n\n"
   su - vagrant -c 'kubectl create -f /vagrant/manifests/calico-install-vxlan.yaml'
@@ -30,7 +30,7 @@ printf "\nInstalling metric server...\n\n"
    su - vagrant -c 'helm install metrics-server /vagrant/manifests/metrics-server -n kube-system'
 
 printf "\nInstalling k8s Dashboard...\n\n"
-  su - vagrant -c 'h install k8s-dashboard kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values.yaml'
+  su - vagrant -c 'helm install k8s-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --values /vagrant/manifests/kubernetes-dashboard/values.yaml'
 
 printf "\nCooling down for 30 seconds...\n"
   sleep 30
