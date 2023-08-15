@@ -24,26 +24,26 @@ printf "\nInstalling Tigera Operator for Calico CNI...\n\n"
   su - vagrant -c 'helm install calico /vagrant/manifests/tigera-operator -f /vagrant/manifests/tigera-operator/values.yaml --namespace tigera-operator'
 
 printf "\nInstalling Calico CNI with VXLAN...\n\n"
-  su - vagrant -c 'kubectl create -f /vagrant/manifests/calico-install-vxlan.yaml'
+  su - vagrant -c 'kubectl apply -f /vagrant/manifests/calico-install-vxlan.yaml'
 
 printf "\nInstalling metric server...\n\n"
    su - vagrant -c 'helm install metrics-server /vagrant/manifests/metrics-server -n kube-system'
 
 printf "\nInstalling k8s Dashboard...\n\n"
-  su - vagrant -c 'helm install k8s-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --values /vagrant/manifests/kubernetes-dashboard/values.yaml'
+  su - vagrant -c 'helm install k8s-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard -f /vagrant/manifests/kubernetes-dashboard/values.yaml'
 
-printf "\nCooling down for 30 seconds...\n"
-  sleep 30
-
-printf "\n Creating dashboard User...\n\n"
-  su - vagrant -c 'kubectl apply -f /vagrant/manifests/dahboard-admin-user.yaml'
-
-printf "\n Extracting dashboard token\n"
-  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user --duration=8760h > /vagrant/dashboard_token.txt'
-
-printf "Append token in kubeconfig file.\n"
-  su - vagrant -c 'sed -i "/client-key-data/a\    token: $(cat /vagrant/dashboard_token.txt)" /vagrant/config'
-
-printf "Sleeping for 5 sec.."
-  sleep 5
-  sh /vagrant/ShellScripts/6.configure_kubectl.sh
+#printf "\nCooling down for 30 seconds...\n"
+#  sleep 30
+#
+#printf "\n Creating dashboard User...\n\n"
+#  su - vagrant -c 'kubectl apply -f /vagrant/manifests/dahboard-admin-user.yaml'
+#
+#printf "\n Extracting dashboard token\n"
+#  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user --duration=8760h > /vagrant/dashboard_token.txt'
+#
+#printf "Append token in kubeconfig file.\n"
+#  su - vagrant -c 'sed -i "/client-key-data/a\    token: $(cat /vagrant/dashboard_token.txt)" /vagrant/config'"system:metrics-server-aggregated-reader
+#
+#printf "Sleeping for 5 sec.."
+#  sleep 5
+#  sh /vagrant/ShellScripts/6.configure_kubectl.sh
