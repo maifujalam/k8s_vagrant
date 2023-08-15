@@ -22,7 +22,7 @@ build {
   }
 
   provisioner "file" {
-    source = "../packages"
+    source = "../package_downloader/packages"
     destination = "/vagrant/"
   }
   provisioner "file" {

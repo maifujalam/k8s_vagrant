@@ -1,5 +1,9 @@
 #!/bin/bash
 
+KUBERNETES_VERSION=1.27.4-0
+if [ $# -gt 0 ]; then
+  KUBERNETES_VERSION="$1"
+fi
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -11,9 +15,17 @@ EOF
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum clean all
 #sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-if [ ! "$(ls -A /vagrant/packages/)" ];then
-  printf "Downloading Packages\n"
-  exit 0;
+PACKAGE_DIRECTORY="/vagrant/packages/"
+if [ ! -d $PACKAGE_DIRECTORY ] ;then
+  printf "Directory not present.Downloading Packages\n"
+  sudo yum install -y containerd kubelet-$KUBERNETES_VERSION kubeadm-$KUBERNETES_VERSION kubectl-$KUBERNETES_VERSION --downloadonly --downloaddir=/vagrant/packages/.
+fi
+
+if [ -d "$PACKAGE_DIRECTORY" ] && [ -z "$(ls -A $PACKAGE_DIRECTORY)" ]; then
+    echo "The directory $PACKAGE_DIRECTORY exists and is empty."
+    sudo yum install -y containerd kubelet-$KUBERNETES_VERSION kubeadm-$KUBERNETES_VERSION kubectl-$KUBERNETES_VERSION --downloadonly --downloaddir=/vagrant/packages/.
+else
+    echo "The directory $PACKAGE_DIRECTORY either does not exist or is not empty."
 fi
 printf "Installing Packages\n"
 sudo rpm -Uhv /vagrant/packages/*.rpm

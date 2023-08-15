@@ -29,7 +29,7 @@
 
 
 # NOTE:- Set environment variable at ~/.bashrc with, export SSHPASS=vagrant
-
+BASEOS=baseos
 MASTER=master
 WORKER1=worker1
 WORKER2=worker2
@@ -40,6 +40,23 @@ WORKER2=worker2
 #  ssh-keyscan worker1
 #  ssh-keyscan worker2
 #} >> ~/.ssh/known_hosts
+
+echo "Pinging $BASEOS"
+if ping -c 2 $BASEOS&> /dev/null ;then
+  echo "$BASEOS is reachable"
+  ####### Configure MASTER #######
+  # Remove any known host of MASTER
+  ssh-keygen -f "/home/alam/.ssh/known_hosts" -R $BASEOS &> /dev/null
+  # Add MASTER fingerprint to known host
+  (ssh-keyscan $BASEOS >> ~/.ssh/known_hosts) &> /dev/null
+  # Copying ssh public keys to servers
+  sshpass -e ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no vagrant@$BASEOS &> /dev/null
+  echo "$BASEOS is configured for password less SSH from host"
+  # ssh vagrant@master
+  else
+    echo "$BASEOS is NOT Reachable"
+fi
+
 echo "Pinging $MASTER"
 if ping -c 2 $MASTER &> /dev/null ;then
   echo "$MASTER is reachable"
