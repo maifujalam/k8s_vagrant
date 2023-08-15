@@ -13,7 +13,7 @@ sudo yum clean all
 #sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 if [ ! "$(ls -A /vagrant/packages/)" ];then
   printf "Downloading Packages\n"
-  sudo yum install -y containerd kubelet=$1 kubeadm=$1 kubectl=$1 --downloadonly --downloaddir=/vagrant/packages/. --skip-broken
+  exit 0;
 fi
 printf "Installing Packages\n"
 sudo rpm -Uhv /vagrant/packages/*.rpm
