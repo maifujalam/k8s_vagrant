@@ -1,0 +1,6 @@
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+source <(helm completion bash)
+alias h=helm
+complete -o default -F __start_helm h
