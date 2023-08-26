@@ -6,7 +6,7 @@ MASTER = "master"               # Name of Master VM
 WORKER = "worker"                # Names of worker VMs(worker vms will be named as worker1,worker2,worker3 ... )
 CPU_MASTER = 4                  # Specify the CPU of master VM(Example :-1,2)
 CPU_WORKER = 2                   # Specify CPU of each worker VMs(Example :-1,2)
-MEMORY_MASTER = 4096           # Specify the RAM of master VMs in MB(Example :- 2048,4096)
+MEMORY_MASTER = 2048           # Specify the RAM of master VMs in MB(Example :- 2048,4096)
 MEMORY_WORKER = 2048             # Specify the RAM of each worker VMs in MB(Example :- 2048,4096)
 HDD = '20GB'                    # HDD of Each VM (Examples :- "15GB","20GB","30GB")
 
