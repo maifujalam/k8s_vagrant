@@ -240,7 +240,9 @@ affinity: {}
 #     operator: Equal
 #     value: master
 #     effect: NoSchedule
-tolerations: []
+tolerations:
+ - key: node-role.kubernetes.io/control-plane
+   effect: NoSchedule
 
 # A list of Kubernetes TopologySpreadConstraints, if required; see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core
 # for example:
@@ -370,7 +372,9 @@ webhook:
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+   - key: node-role.kubernetes.io/control-plane
+     effect: NoSchedule
 
   topologySpreadConstraints: []
 
@@ -527,7 +531,9 @@ cainjector:
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+   - key: node-role.kubernetes.io/control-plane
+     effect: NoSchedule
 
   topologySpreadConstraints: []
 
@@ -638,7 +644,9 @@ startupapicheck:
 
   affinity: {}
 
-  tolerations: []
+  tolerations:
+   - key: node-role.kubernetes.io/control-plane
+     effect: NoSchedule
 
   # Optional additional labels to add to the startupapicheck Pods
   podLabels: {}

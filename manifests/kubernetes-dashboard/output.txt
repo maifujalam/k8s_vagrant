@@ -1,0 +1,25 @@
+NAME: k8s-dashboard
+LAST DEPLOYED: Sat Aug 26 21:29:11 2023
+NAMESPACE: kubernetes-dashboard
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+*************************************************************************************************
+*** PLEASE BE PATIENT: Kubernetes Dashboard may need a few minutes to get up and become ready ***
+*************************************************************************************************
+
+Congratulations! You have just installed Kubernetes Dashboard in your cluster.
+
+It looks like you already have nginx installed in your cluster. First find the namespace where it is installed and then find its main service name. By default, it should be located in namespace called nginx or nginx-ingress and service name should be nginx-controller.
+
+To access Dashboard run (replace placeholders with actual names):
+  kubectl -n <nginx-namespace> port-forward svc/<nginx-service> 8443:443
+
+Dashboard will be available at:
+  https://localhost:8443
+
+NOTE: It may take a few minutes for the Ingress IP/Domain to be available.
+      It does not apply to local dev Kubernetes installations such as kind, etc.
+      You can watch the status using:
+        kubectl -n kubernetes-dashboard get ing k8s-dashboard-kubernetes-dashboard -w

@@ -171,7 +171,9 @@ extraVolumes: []
 
 nodeSelector: {}
 
-tolerations: []
+tolerations:
+ - key: node-role.kubernetes.io/control-plane
+   effect: NoSchedule
 
 affinity: {}
 

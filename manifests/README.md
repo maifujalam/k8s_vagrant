@@ -17,16 +17,19 @@ Cert-manager:-
 6. helm install cert-manager cert-manager -n cert-manager --values cert-manager/values.yaml
 
 nginx-ingress-controller
-1. helm repo add bitnami https://charts.bitnami.com/bitnami
+1. helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 2. helm repo update
-3. helm search repo nginx-ingress-controller
-4. helm pull bitnami/nginx-ingress-controller --version=9.8.0 --untar
-5. kubectl create ns nginx-ingress-controller
-6. helm install nginx-ingress-controller nginx-ingress-controller -n nginx-ingress-controller -f nginx-ingress-controller/values.yaml
+3. helm search repo nginx
+4. helm pull ingress-nginx/ingress-nginx --version=4.7.1 --untar
+5. kubectl create ns ingress-nginx
+6. helm install ingress-nginx ingress-nginx -n ingress-nginx -f ingress-nginx/values.yaml
+7. helm uninstall ingress-nginx -n ingress-nginx
 
-Dashboard:
-1. helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+kubernetes-dashboard:
+1. helm repo add kubernetes-dashboard  https://kubernetes.github.io/dashboard
 2. helm repo update
 3. helm search repo dashboard 
-4. helm pull kubernetes-dashboard/kubernetes-dashboard --version=7.0.3 --untar
-5. h install k8s-dashboard kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values.yaml
+4. helm pull kubernetes-dashboard/kubernetes-dashboard --version=7.0.0-alpha0 --untar
+5. kubectl create ns kubernetes-dashboard
+5. helm install kubernetes-dashboard  kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values.yaml
+6. helm uninstall kubernetes-dashboard -n kubernetes-dashboard
