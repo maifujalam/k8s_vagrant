@@ -54,8 +54,8 @@ printf "\nCreating namespace for ingress-nginx ...\n"
 printf "\nInstalling ingress-nginx...\n"
    su - vagrant -c 'helm -n ingress-nginx install ingress-nginx /vagrant/manifests/ingress-nginx -f /vagrant/manifests/ingress-nginx/values.yaml'
 
-printf "\nCooling down for 20 seconds...\n"
-  sleep 20
+printf "\nCooling down for 90 seconds...\n"
+  sleep 90
 
 ####################### Install k8s-dashboard########################
 printf "\nCreating namespace for k8s-dashboard ...\n"
