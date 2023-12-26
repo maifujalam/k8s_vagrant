@@ -1,0 +1,8 @@
+{{- if .Values.nodePool -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubevip
+  namespace: kube-system
+data:{{ toYaml .Values.nodePool | nindent 2 }}
+{{- end }}

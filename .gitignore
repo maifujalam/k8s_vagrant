@@ -1,0 +1,5 @@
+*.vagrant
+*.idea
+*.box
+*.tar.gz
+*config

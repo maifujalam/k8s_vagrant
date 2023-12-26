@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-echo-server
+  labels:
+    app: deployment-echo-server
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: deployment-echo-server
+      labels:
+        app: deployment-echo-server
+    spec:
+      containers:
+        - image: inanimate/echo-server
+          imagePullPolicy: IfNotPresent
+          name: echo-container
+          resources:
+            requests:
+              cpu: 10m
+              memory: 8Mi
+            limits:
+              cpu: 20m
+              memory: 16Mi
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: deployment-echo-server
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-service
+spec:
+  externalTrafficPolicy: Cluster
+  selector:
+    app: deployment-echo-server
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer

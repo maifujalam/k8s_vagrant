@@ -1,0 +1,12 @@
+Kube-VIP ( Load Balance for on prem Kubernetes)
+1. Enable Load Balancing service type by implementing kube-vip-cloud-provider load balancer which assign IP from pool to service type Load Balancer.
+2. References:-
+    a. https://github.com/kube-vip/kube-vip-cloud-provider
+    b. https://github.com/kube-vip/kube-vip-cloud-provider
+    c. https://kube-vip.io/
+3. Deploy all k8s files from folder kube-vip.This will create below objects:
+    a. helloworld-lb: This will create samle helloworld deployment with load banacer.This will bvalidate if kubevip is working as expected.
+    b. ip-pool: This will create global IP Pool (IPAM Config) which will serve IP's for Load Balancers kind service across cluster.
+    c. kube-vip: This will create kube-vip Deamon Set to run on only master node and implement ARP to advertise LB IP across cluster.
+    d. kube-vip-cloud-controller: Will pick address from ip-pool and add as label in LB service which will help to generate LB IP as external address.
+

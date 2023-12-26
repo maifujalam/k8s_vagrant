@@ -1,0 +1,26 @@
+---
+# Source: hello-kubernetes/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-kubernetes-release-name
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+  labels:
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - helloworld.master.com
+      secretName: helloworld-secret
+  rules:
+    - host: helloworld.master.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: "hello-kubernetes-release-name"
+                port:
+                  name: 80

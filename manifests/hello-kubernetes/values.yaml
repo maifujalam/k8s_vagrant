@@ -1,0 +1,47 @@
+# Provide a custom message
+message: ""
+
+# Remember to set service.type=ClusterIP if you are using an ingress
+ingress:
+  enabled: true
+  configured: true
+  rewritePath: false
+  pathPrefix: ""
+  extraPaths: ""
+  ingressClassName: "nginx"
+  annotations: {}
+  labels: {}
+  issuer:
+    scope: cluster
+    name: selfsigned-cluster-issuer
+  hosts:
+    - helloworld.master.com
+  path: /
+  pathType: Prefix
+  secretName: "helloworld-secret"
+
+
+
+service:
+  type: ClusterIP
+  port: 80
+  externalPort: 443
+deployment:
+  replicaCount: 2
+  container:
+    image:
+      repository: "paulbouwer/hello-kubernetes"
+      tag: "" # uses chart appVersion if not provided
+      pullPolicy: IfNotPresent
+    port: 8080
+
+  # Currently only linux images on amd64 architecture are supported - support for arm64 and windows/amd64 coming ...
+  nodeSelector:
+    kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+  resources: {}
+
+  tolerations: []
+
+  affinity: {}
+
