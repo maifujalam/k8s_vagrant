@@ -1,0 +1,9 @@
+1. Kubernetes sa does not create secret with token.
+2. Create sa forst and the create secret with yaml from example.This will create non expiring token.
+3. Generate key:-
+    a. ssh-keygen -t rsa -b 2048 -f id_rsa -P ""
+    b.
+4. Create base64 of csr: cat myuser.csr | base64 | tr -d "\n"
+5. Open vi editor and go to request field: delete word using vi shortcut dw )delete word).
+6. Approve CSR: k certificate approve akshay, reject: k certificate reject akshay
+7.
