@@ -65,7 +65,7 @@ printf "\nCooling down for 90 seconds...\n"
 ####################### Install k8s-dashboard########################
 
 printf "\nInstalling k8s Dashboard...\n"
-  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard -f /vagrant/manifests/kubernetes-dashboard/values1.yaml'
+  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard -f /vagrant/manifests/kubernetes-dashboard/values.yaml'
 
 printf "\nCooling down for 20 seconds...\n"
   sleep 20
@@ -79,6 +79,21 @@ printf "\nAppend token in kubeconfig file.\n"
 
 printf "\nCooling down for 5 sec..\n"
   sleep 5
+
+####################### Install Prometheus ########################
+printf "\nInstalling Prometheus..\n"
+  su - vagrant -c 'helm -n monitoring install prometheus /vagrant/manifests/prometheus --create-namespace'
+
+printf "\nCooling down for 20 seconds...\n"
+  sleep 10
+
+####################### Install Grafana ########################
+printf "\nInstalling Grafana Dashboard...\n"
+  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard -f /vagrant/manifests/kubernetes-dashboard/values.yaml'
+
+printf "\nCooling down for 20 seconds...\n"
+  sleep 20
+
 
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"
