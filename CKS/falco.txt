@@ -1,0 +1,20 @@
+1. Installation:-
+    a. curl -L -O https://download.falco.org/packages/bin/x86_64/falco-0.36.2-x86_64.tar.gz
+    b. tar -xzvf falco-0.36.2-x86_64.tar.gz
+2. Falco will be already present in CKS env.
+3. journalctl -fu falco [f: follow, u: unit]
+4. Validate falco:-
+    a. Notify in falco logs  if exec into container:
+        i. k exec -it nginx -- bash
+        ii. - rule: Detect shell inside container
+              desc: Alert if shell inside container is opened.
+
+    b. Notify if try to access shadow file/
+    c. Notify if try to delete /etc/audit.log
+    d. Notify if
+5. Write falco rules( 5 mandatory keys):-
+   - rule: <uniq name of rule>
+     desc: <detailed description of rule>
+     condition: <condition to trigger rule>
+     output: <puput to generate for event>
+     priority:

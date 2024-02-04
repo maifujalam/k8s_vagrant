@@ -50,5 +50,24 @@ kubernetes-dashboard:
 3. helm search repo dashboard 
 4. helm pull kubernetes-dashboard/kubernetes-dashboard --version=7.0.0-alpha1 --untar
 5. kubectl create ns kubernetes-dashboard
-5. helm install kubernetes-dashboard  kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values1.yaml
-6. helm uninstall kubernetes-dashboard -n kubernetes-dashboard
+6. helm install kubernetes-dashboard  kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values1.yaml
+7. helm uninstall kubernetes-dashboard -n kubernetes-dashboard
+
+prometheus:
+1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+2. helm repo update
+3. helm search repo prometheus
+4. helm pull prometheus-community/prometheus --version=25.10.0 --untar
+5. helm -n monitoring install prometheus prometheus --create-namespace
+6. helm -n monitoring uninstall prometheus
+7. helm -n monitoring upgrade prometheus prometheus --create-namespace
+
+
+Grafana:-
+1. helm repo add grafana https://grafana.github.io/helm-charts
+2. helm repo update
+3. helm search repo grafana
+4. helm pull grafana/grafana --version=7.2.5 --untar
+5. helm -n monitoring install grafana grafana --create-namespace
+6. helm -n monitoring upgrade grafana grafana --create-namespace
+7. Default pass admin/admin
