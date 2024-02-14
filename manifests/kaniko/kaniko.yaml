@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:v1.20.0
+    imagePullPolicy: IfNotPresent
+    args: ["--dockerfile=/workspace/Dockerfile",
+            "--context=dir://workspace",
+            "--insecure-registry=docker-registry:5000",
+            --destination=ubuntu-local:1]
+    volumeMounts:
+      - name: pvc-kaniko
+        mountPath: /workspace
+  restartPolicy: Never
+  volumes:
+    - name: pvc-kaniko
+      persistentVolumeClaim:
+        claimName: pvc-kaniko

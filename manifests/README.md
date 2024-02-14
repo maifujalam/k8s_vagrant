@@ -70,4 +70,22 @@ Grafana:-
 4. helm pull grafana/grafana --version=7.2.5 --untar
 5. helm -n monitoring install grafana grafana --create-namespace
 6. helm -n monitoring upgrade grafana grafana --create-namespace
-7. Default pass admin/admin
+7. helm -n monitoring uninstall grafana
+8. Default pass admin/admin
+
+Docker Registry:-
+1. helm repo add twuni https://helm.twun.io
+2. helm repo update
+3. helm search repo registry
+4. helm pull twuni/docker-registry --version=2.2.2 --untar
+5. helm -n image-registry install docker-registry docker-registry --create-namespace
+6. helm -n image-registry upgrade docker-registry docker-registry --create-namespace
+7. helm -n image-registry uninstall docker-registry
+8. Creds: cluster-url: docker-registry:5000  curl -X GET https://docker-registry.master.com/v2/_catalog -k
+
+Blackbox Exporter:-
+1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+2. helm search repo blackbox
+3. helm pull prometheus-community/prometheus-blackbox-exporter --version=8.10.1 --untar
+4. helm -n blackbox-exporter install blackbox prometheus-blackbox-exporter --create-namespace
+5. helm -n blackbox-exporter uninstall blackbox 
