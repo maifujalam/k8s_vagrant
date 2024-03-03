@@ -1,4 +1,5 @@
 1. k get pod web-dashboard-97c9c59f6-9rfwr -o yaml | grep -i account
 2. Opt out for servoce account token:
 https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting
-3.
+3. k get rolebindings.rbac.authorization.k8s.io  -A -o yaml | grep -i -A 3 -B 2 user
+4.

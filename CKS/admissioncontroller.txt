@@ -1,0 +1,19 @@
+1. Search: admissioncontroller
+2. Add flag-1: kube-apiserver --enable-admission-plugins=NamespaceLifecycle,LimitRanger
+       flag-2: kube-apiserver --admission-control-config-file=/etc/kubernetes/admission-config.yaml
+3.
+apiVersion: apiserver.config.k11s.io/v1
+  kind: AdmissionConfiguration
+  plugins:
+  - name: ImagePolicyWebhook
+    configuration:
+      imagePolicy:
+        kubeConfigFile: <PATH_TO_KUBECONFIG>
+        allowTTL: 50
+        denyTTL: 50
+        retryBackoff: 500
+        defaultAllow: false
+
+4. In admission_configuration.yaml we need to pass kubeconfig (like kubeconfig ) file which have details of API server
+    access details.
+5.     
