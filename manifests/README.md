@@ -60,6 +60,7 @@ kube-prometheous-stack
 4. helm pull prometheus-community/kube-prometheus-stack --version=56.6.2 --untar
 5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace
 6. helm -n monitoring uninstall kube-prometheus-stack
+7. Creds: admin/prom-operator [ k -n monitoring get secret kube-prometheus-stack-grafana --template='{{ index .data "admin-password" | base64decode}}' ]
 
 prometheus[not required if using kube prometheous stack]:
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
