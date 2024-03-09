@@ -376,11 +376,11 @@ alertmanager:
   #       {{ end }}
 
   ingress:
-    enabled: true
+    enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
 
@@ -394,17 +394,17 @@ alertmanager:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts:
-      - alertmanager.master.com
+    hosts: []
+      # - alertmanager.domain.com
 
     ## Paths to use for ingress rules - one path should match the alertmanagerSpec.routePrefix
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## TLS configuration for Alertmanager Ingress
     ## Secret must be manually created in the namespace
@@ -427,7 +427,7 @@ alertmanager:
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
     labels: {}
@@ -443,12 +443,12 @@ alertmanager:
 
     ## Paths to use for ingress rules
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## Secret name containing the TLS certificate for alertmanager per replica ingress
     ## Secret must be manually created in the namespace
@@ -961,12 +961,12 @@ grafana:
   ingress:
     ## If true, Grafana Ingress will be created
     ##
-    enabled: true
+    enabled: false
 
     ## IngressClassName for Grafana Ingress.
     ## Should be provided if Ingress is enable.
     ##
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     ## Annotations for Grafana Ingress
     ##
@@ -981,9 +981,9 @@ grafana:
     ## Hostnames.
     ## Must be provided if Ingress is enable.
     ##
-    hosts:
-      - grafana.master.com
-#     hosts: []
+    # hosts:
+    #   - grafana.domain.com
+    hosts: []
 
     ## Path for grafana ingress
     path: /
@@ -2976,11 +2976,11 @@ prometheus:
 
   # Ingress exposes thanos sidecar outside the cluster
   thanosIngress:
-    enabled: true
+    enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
     labels: {}
@@ -2993,17 +2993,17 @@ prometheus:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts:
-      - thanos-gateway.master.com
+    hosts: []
+      # - thanos-gateway.domain.com
 
     ## Paths to use for ingress rules
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## TLS configuration for Thanos Ingress
     ## Secret must be manually created in the namespace
@@ -3026,11 +3026,11 @@ prometheus:
   #     someoneelse:$apr1$DMZX2Z4q$6SbQIfyuLQd.xmo/P0m2c.
 
   ingress:
-    enabled: true
+    enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
     labels: {}
@@ -3041,18 +3041,18 @@ prometheus:
     ## Hostnames.
     ## Must be provided if Ingress is enabled.
     ##
-    hosts:
-      - prometheus.master.com
-#     hosts: []
+    # hosts:
+    #   - prometheus.domain.com
+    hosts: []
 
     ## Paths to use for ingress rules - one path should match the prometheusSpec.routePrefix
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## TLS configuration for Prometheus Ingress
     ## Secret must be manually created in the namespace
@@ -3070,7 +3070,7 @@ prometheus:
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
     labels: {}
@@ -3086,12 +3086,12 @@ prometheus:
 
     ## Paths to use for ingress rules
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## Secret name containing the TLS certificate for Prometheus per replica ingress
     ## Secret must be manually created in the namespace
@@ -4072,11 +4072,11 @@ thanosRuler:
     maxUnavailable: ""
 
   ingress:
-    enabled: true
+    enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    ingressClassName: nginx
+    # ingressClassName: nginx
 
     annotations: {}
 
@@ -4084,17 +4084,17 @@ thanosRuler:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts:
-      - thanosruler.master.com
+    hosts: []
+      # - thanosruler.domain.com
 
     ## Paths to use for ingress rules - one path should match the thanosruler.routePrefix
     ##
-    paths:
-    - /
+    paths: []
+    # - /
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    pathType: ImplementationSpecific
+    # pathType: ImplementationSpecific
 
     ## TLS configuration for ThanosRuler Ingress
     ## Secret must be manually created in the namespace
