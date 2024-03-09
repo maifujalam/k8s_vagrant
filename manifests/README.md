@@ -53,7 +53,15 @@ kubernetes-dashboard:
 6. helm install kubernetes-dashboard  kubernetes-dashboard -n kubernetes-dashboard --values kubernetes-dashboard/values1.yaml
 7. helm uninstall kubernetes-dashboard -n kubernetes-dashboard
 
-prometheus:
+kube-prometheous-stack
+1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+2. helm repo update
+3. helm search repo kube-prometheus-stack
+4. helm pull prometheus-community/kube-prometheus-stack --version=56.6.2 --untar
+5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace
+6. helm -n monitoring uninstall kube-prometheus-stack
+
+prometheus[not required if using kube prometheous stack]:
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 2. helm repo update
 3. helm search repo prometheus
@@ -63,7 +71,7 @@ prometheus:
 7. helm -n monitoring upgrade prometheus prometheus --create-namespace
 
 
-Grafana:-
+Grafana[not required if using kube prometheous stack]:-
 1. helm repo add grafana https://grafana.github.io/helm-charts
 2. helm repo update
 3. helm search repo grafana
