@@ -60,7 +60,8 @@ kube-prometheous-stack
 4. helm pull prometheus-community/kube-prometheus-stack --version=56.6.2 --untar
 5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace
 6. helm -n monitoring uninstall kube-prometheus-stack
-7. Creds: admin/prom-operator [ k -n monitoring get secret kube-prometheus-stack-grafana --template='{{ index .data "admin-password" | base64decode}}' ]
+7. helm -n monitoring upgrade kube-prometheus-stack kube-prometheus-stack 
+8. Creds: admin/prom-operator [ k -n monitoring get secret kube-prometheus-stack-grafana --template='{{ index .data "admin-password" | base64decode}}' ]
 
 prometheus[not required if using kube prometheous stack]:
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -97,4 +98,10 @@ Blackbox Exporter:-
 2. helm search repo blackbox
 3. helm pull prometheus-community/prometheus-blackbox-exporter --version=8.10.1 --untar
 4. helm -n blackbox-exporter install blackbox prometheus-blackbox-exporter --create-namespace
-5. helm -n blackbox-exporter uninstall blackbox 
+5. helm -n blackbox-exporter upgrade blackbox prometheus-blackbox-exporte
+6. helm -n blackbox-exporter uninstall blackbox
+
+hello-kubernetes:-
+1. helm install helloworld hello-kubernetes
+2. helm upgrade helloworld hello-kubernetes
+3. helm uninstall helloworld
