@@ -3594,7 +3594,7 @@ prometheus:
     ##
     additionalScrapeConfigs:
       - job_name: blackbox
-        metrics_path: /metrics
+        metrics_path: /probe
         scrape_interval: 10s
         params:
           module: [http_2xx]
@@ -3603,8 +3603,11 @@ prometheus:
             - https://www.google.com
             - https://www.google.co.in
             - https://www.example.com
-            - http://hello-kuhgnbernetes-helloworld.default:80
-            - http://hhjghj.com
+            - https://helloworld.master.com/
+            - http://hello-kubernetes-helloworld.default:80
+            - maifuj.info
+            - https://maifuj.info
+            - https://www.maifuj.info
         relabel_configs:
         - source_labels: [__address__]
           target_label: __param_target
