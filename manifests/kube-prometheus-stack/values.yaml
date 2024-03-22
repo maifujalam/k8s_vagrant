@@ -3601,13 +3601,6 @@ prometheus:
         static_configs:
           - targets:
             - https://www.google.com
-            - https://www.google.co.in
-            - https://www.example.com
-            - https://helloworld.master.com/
-            - http://hello-kubernetes-helloworld.default:80
-            - maifuj.info
-            - https://maifuj.info
-            - https://www.maifuj.info
         relabel_configs:
         - source_labels: [__address__]
           target_label: __param_target
@@ -3615,6 +3608,27 @@ prometheus:
           target_label: instance  # targrt did not worked
         - target_label: __address__
           replacement: blackbox-prometheus-blackbox-exporter.blackbox-exporter:9115
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: namespace
+        - source_labels: [__meta_kubernetes_deployment]
+          target_label: deployment
+        - source_labels: [__meta_kubernetes_service_name]
+          target_label: service
+        - source_labels: [__meta_kubernetes_pod_name]
+          target_label: pod
+        - source_labels: [__param_target]
+          target_label: instance
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        # Add additional Kubernetes labels for up metrics
+#         - action: labelmap
+#           regex: __meta_kubernetes_pod_label_additional_label
+#           target_label: additional_label
+        kubernetes_sd_configs:
+          - role: endpoints
+            kubeconfig_file: ""
+            follow_redirects: true
+            enable_http2: true
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
