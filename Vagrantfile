@@ -14,7 +14,7 @@ IP_MASTER = '192.168.56.2'
 IP_WORKER = ['192.168.56.3','192.168.56.4']
 
 Vagrant.configure("2") do |config|
-    config.vagrant.plugins = ['vagrant-disksize','vagrant-hostmanager']
+    config.vagrant.plugins = ['vagrant-disksize','vagrant-hostmanager','vagrant-timezone']
     config.ssh.insert_key = false
     config.vm.box_check_update = false
     config.hostmanager.enabled = true
@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
     config.hostmanager.manage_guest = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
+    config.timezone.value = :host
     #config.disksize.size = HDD
     config.vm.synced_folder ".", "/vagrant", disabled: false
     (1..NM).each do |i|
