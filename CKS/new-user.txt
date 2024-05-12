@@ -1,0 +1,4 @@
+1. create key: openssl genrsa -out 60099.key 2048
+2. create csr: openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
+3. manually sign csr: openssl x509 -req -in 60099.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out 60099.crt -days 500
+4. sign csr with k: k certificate approve csr_name
