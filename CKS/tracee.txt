@@ -1,0 +1,9 @@
+1. strace -p $(pidof etcd)
+2. strace -c -p 2313 [ -c for show summery in table] for all system call.
+3. AquaSec created tracee: Its an opensource tool make use of eBPF[extended Bootly packet Filter].
+4. Tracee have following dependency:-
+    a. /tmp/tracee [bind mount from source to container]
+    b. /lib/modules [Kernel headers mount as readonly]
+    c. /usr/src [kernel module dependency]
+    d. Run container as a privilege.
+

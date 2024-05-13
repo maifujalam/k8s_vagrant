@@ -1,0 +1,2 @@
+1. trivy image nginx
+2.

@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "hello-kubernetes.name" . }}
+  labels:
+    name: {{- include "hello-kubernetes.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "hello-kubernetes.selectorLabels" . | nindent 4 }}
+  endpoints:
+  - port: http
