@@ -1,0 +1,4 @@
+1. making pod unable to write to storage.
+    containers:
+        securityContext:
+            readOnlyRootFileSystem: true

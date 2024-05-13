@@ -3415,11 +3415,11 @@ prometheus:
     ## Probes to be selected for target discovery.
     ## If {}, select all Probes
     ##
-    probeSelector: {}
-    ## Example which selects Probes with label "prometheus" set to "somelabel"
-    # probeSelector:
-    #   matchLabels:
-    #     prometheus: somelabel
+    #probeSelector: {}
+    # Example which selects Probes with label "prometheus" set to "somelabel"
+    probeSelector:
+      matchLabels:
+         httpprobecreator/probe: blackbox-exporter
 
     ## If nil, select own namespace. Namespaces to be selected for Probe discovery.
     probeNamespaceSelector: {}
@@ -3592,43 +3592,43 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs:
-      - job_name: blackbox
-        metrics_path: /probe
-        scrape_interval: 10s
-        params:
-          module: [http_2xx]
-        static_configs:
-          - targets:
-            - https://www.google.com
-        relabel_configs:
-        - source_labels: [__address__]
-          target_label: __param_target
-        - source_labels: [__param_target]
-          target_label: instance  # targrt did not worked
-        - target_label: __address__
-          replacement: blackbox-prometheus-blackbox-exporter.blackbox-exporter:9115
-        - source_labels: [__meta_kubernetes_namespace]
-          target_label: namespace
-        - source_labels: [__meta_kubernetes_deployment]
-          target_label: deployment
-        - source_labels: [__meta_kubernetes_service_name]
-          target_label: service
-        - source_labels: [__meta_kubernetes_pod_name]
-          target_label: pod
-        - source_labels: [__param_target]
-          target_label: instance
-        - action: labelmap
-          regex: __meta_kubernetes_pod_label_(.+)
-        # Add additional Kubernetes labels for up metrics
+#     additionalScrapeConfigs:
+#       - job_name: blackbox
+#         metrics_path: /probe
+#         scrape_interval: 10s
+#         params:
+#           module: [http_2xx]
+#         static_configs:
+# #           - targets:
+# #             - https://www.google.com
+#         relabel_configs:
+#         - source_labels: [__address__]
+#           target_label: __param_target
+#         - source_labels: [__param_target]
+#           target_label: instance  # targrt did not worked
+#         - target_label: __address__
+#           replacement: blackbox-prometheus-blackbox-exporter.blackbox-exporter:9115
+#         - source_labels: [__meta_kubernetes_namespace]
+#           target_label: namespace
+#         - source_labels: [__meta_kubernetes_deployment]
+#           target_label: deployment
+#         - source_labels: [__meta_kubernetes_service_name]
+#           target_label: service
+#         - source_labels: [__meta_kubernetes_pod_name]
+#           target_label: pod
+#         - source_labels: [__param_target]
+#           target_label: instance
 #         - action: labelmap
-#           regex: __meta_kubernetes_pod_label_additional_label
-#           target_label: additional_label
-        kubernetes_sd_configs:
-          - role: endpoints
-            kubeconfig_file: ""
-            follow_redirects: true
-            enable_http2: true
+#           regex: __meta_kubernetes_pod_label_(.+)
+#         # Add additional Kubernetes labels for up metrics
+# #         - action: labelmap
+# #           regex: __meta_kubernetes_pod_label_additional_label
+# #           target_label: additional_label
+#         kubernetes_sd_configs:
+#           - role: endpoints
+#             kubeconfig_file: ""
+#             follow_redirects: true
+#             enable_http2: true
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node

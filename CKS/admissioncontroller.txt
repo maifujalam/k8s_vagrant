@@ -16,4 +16,6 @@ apiVersion: apiserver.config.k11s.io/v1
 
 4. In admission_configuration.yaml we need to pass kubeconfig (like kubeconfig ) file which have details of API server
     access details.
-5.     
+5. Check the current admission controler webhook: ps -ax | grep kubelet | grep admission
+6. --enable-admission-plugins=NodeRestriction
+7.
