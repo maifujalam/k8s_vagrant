@@ -1,0 +1,17 @@
+kind: Probe
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: blackbox-google-prob
+  namespace: monitoring
+  labels:
+    httpprobecreator/probe: blackbox-exporter
+spec:
+  interval: 20s
+  module: http_2xx
+  jobName: blackbox-google
+  prober:
+    url: blackbox-prometheus-blackbox-exporter.blackbox-exporter.svc.cluster.local:9115
+  targets:
+    staticConfig:
+      static:
+      - www.google.com

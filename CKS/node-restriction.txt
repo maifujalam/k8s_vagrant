@@ -1,0 +1,11 @@
+Node isolation/restriction:-
+1. Label a node: label nodes node01 node-restriction.kubernetes.io/one=123
+2. Unlabel a node: k label nodes node01 node-restriction.kubernetes.io/one-
+3. Prevent node to label itself after its compromised:-
+    a. ssh to worker-node
+    b. export KUBECONFIG=/etc/kubernetes/
+    c. k label node node-restriction.kubernetes.io/two=2 [it wont allow with node restriction admission plugin enabled]
+4. Prevent node from labelling admin lables:
+    a. edit /etc/kubernetes/manifests/kubeapiserver.yaml
+    b. add --enable-admission-plugins=NodeRestriction
+5.

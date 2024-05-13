@@ -105,3 +105,6 @@ hello-kubernetes:-
 1. helm install helloworld hello-kubernetes
 2. helm upgrade helloworld hello-kubernetes
 3. helm uninstall helloworld
+
+hello-kubernetes-2:-
+1. helm -n hello2 install hello2 hello-kubernetes --create-namespace
