@@ -18,3 +18,9 @@
      condition: <condition to trigger rule>
      output: <puput to generate for event>
      priority:
+6. Check spanned shell:  cat /var/log/syslog | grep shell
+7. Find falco rule:  cd /etc/falco then grep -ri "shell in"
+8. grep -ri -B 3 -A 3 "shell in"
+9. Grep reccursively in a folder with matching string and line number with starting and endoing 3 line:
+   grep -ri -n -A 3 -B 3 "shell in"
+10.
