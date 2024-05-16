@@ -1,0 +1,4 @@
+1.  podman run -d -e TOKEN=2e064aad-3a90–4cde-ad86–16fad1f8943e --name app localhost/app:latest sleep infinity
+2.  podman exec -it app /bin/bash
+3. Disable shell: rm /usr/bin/bash in Dockerfile
+4. Run any command as user ALAM: USER ALAM (In dockerfile).
