@@ -1,2 +1,4 @@
 1. Falco Change rule OK
-2.
+2. Image policy Webhook
+3. Image digest
+4. Image vurnability scan trivy
