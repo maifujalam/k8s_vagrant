@@ -2,3 +2,6 @@
 2.  podman exec -it app /bin/bash
 3. Disable shell: rm /usr/bin/bash in Dockerfile
 4. Run any command as user ALAM: USER ALAM (In dockerfile).
+5. docke rimage --digests
+6. docker rmi sha256:<image_digest>
+7
