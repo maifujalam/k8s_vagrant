@@ -1,0 +1,6 @@
+1. In k8s docs search: securitycontext  (SC)
+2. SC applies on pod as well as container level.
+3. readOnlyRootFileSystem:
+4. After readOnlyRootFileSystem is made:-
+    a. Add empty dir to whitelist the file system paths.
+    b.
