@@ -4,4 +4,7 @@
 4. Image vurnability scan trivy
 5. Immeutable readOnlyFilesystem
 6. Ingresscreate
-7.
+7. Ingress TLS
+8. Network policy create default deny.
+9. Network policy  metadata protection
+10.Network policy Namespace Selector
