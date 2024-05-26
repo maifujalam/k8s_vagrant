@@ -8,3 +8,6 @@
 8. Network policy create default deny.
 9. Network policy  metadata protection
 10.Network policy Namespace Selector
+11. Privilege Escalation Container
+12. Privileged Container
+13.
