@@ -4,3 +4,7 @@
 4. After readOnlyRootFileSystem is made:-
     a. Add empty dir to whitelist the file system paths.
     b.
+5. Run container as privileged.
+    securityContext:
+      privileged: true
+6.
