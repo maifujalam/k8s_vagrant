@@ -5,3 +5,7 @@
     3.1 openssl x509 -in certificate.crt -text -noout
 4. sign csr with k: k certificate approve csr_name
 5. kubectl auth can-i list deploy --as alam
+6. set user: kubectl config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt --embed-certs=true
+7. Create context:  k config set-context smoke-k8s --cluster kubernetes --user smoke
+8. Use context:
+7. Create RBAC for this user.
