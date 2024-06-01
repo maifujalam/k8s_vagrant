@@ -1,0 +1,4 @@
+Practice-R1:
+3. System Hardening
+    Identify open ports
+    UFW Firewall
