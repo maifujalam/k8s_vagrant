@@ -1,0 +1,15 @@
+1. Secrets
+2. Service Account
+3. Network Policy
+4. App Armor
+5. RBAC
+6. Dockerfile And Kubernetes(Security Context) Best Practices in Terms of Security.
+7. Falco audit logging [ Every 120 sec in a specific Format]
+8. CIS benchmark [ Fix the vulnerabilities ]
+9. AdmissionController
+10. Kubernetes Auditing
+11. RuntimeClass for Pod and Deploy on Specific Node.
+12. Trivy: Scan deployment images with  vulnerability and remove deployments/pods]
+13. ETCD Cypher
+14. Network policy
+15. 
