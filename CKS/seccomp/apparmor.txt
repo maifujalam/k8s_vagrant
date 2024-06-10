@@ -2,7 +2,7 @@
 2. cat /sys/module/apparmor/parameters/enabled
 3. date "+%F_%H-%M"
 4. List of app armor profile loaded can be checked by:-
-    a. cat /sys/kernel/security/apparmor/profiles
+    a. cat /sys/kernel/security/apparmor/profiles OR aa-status OR apparmor_status
 5. Linux capabilities: getcap /usr/bin/ping
 6. https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ [search with security 3rd row in result]
 7. App armour status can be checked with: aa-status
@@ -16,7 +16,7 @@
     b. Select kubernetes version 1.29 in k8s doc.And search app armour.
     c. Check the securing pod by app armour annotation:
         container.apparmor.security.beta.kubernetes.io/<container_name>: <profile_ref>
-    d.
+    d. <profile_ref> is localhost/<profile-name>
 11. Annotations are added at the pod level not at deployment level.
     apiVersion: apps/v1
     kind: Deployment
@@ -39,4 +39,11 @@
           containers:
           - image: httpd:2.4.52-alpine
             name: httpd
-12.
+12. strace -c ls /root [hare -c is for summery]
+13. Use seccomp profile in a pod:
+    a. find the path of seccomp
+
+14. MUST Practice:  https://v1-29.docs.kubernetes.io/docs/tutorials/security/seccomp/
+15. Load App Armour profile into node:
+    a. Locate the apparmor profile: cd /etc/apparmor/ && grep -irn "custom-nginx"
+    b.
