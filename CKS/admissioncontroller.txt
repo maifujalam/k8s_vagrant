@@ -18,4 +18,7 @@ apiVersion: apiserver.config.k11s.io/v1
     access details.
 5. Check the current admission controler webhook: ps -ax | grep kubelet | grep admission
 6. --enable-admission-plugins=NodeRestriction
-7.
+7. After image pull admission config applied:-
+    a. Pod with latest image tag should not create.So it will be not displayed in k get po.It will be in rs. [Impor]
+    b.
+8. Check admission controller config: ps -ef | grep kube-apiserver | grep admission-plugins

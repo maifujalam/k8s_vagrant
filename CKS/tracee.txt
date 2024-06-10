@@ -6,4 +6,6 @@
     b. /lib/modules [Kernel headers mount as readonly]
     c. /usr/src [kernel module dependency]
     d. Run container as a privilege.
-
+5.  strace -p 2144 -f -cw
+6.  strace -p 2144 -cf  [ c: summery, f: follow]
+7.

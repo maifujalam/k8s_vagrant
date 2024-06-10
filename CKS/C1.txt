@@ -1,5 +1,5 @@
 1. Kubernetes sa does not create secret with token.
-2. Create sa forst and the create secret with yaml from example.This will create non expiring token.
+2. Create sa first and the create secret with yaml from example.This will create non expiring token.
 3. Generate key:-
     a. ssh-keygen -t rsa -b 2048 -f id_rsa -P ""
     b.
