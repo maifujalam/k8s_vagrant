@@ -1,5 +1,5 @@
 1. Vis: v.Then select with arrow.
     > right shift
-    > left shift
+    < left shift
 2. select + right clist to paste.
 3.

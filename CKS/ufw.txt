@@ -1,0 +1,17 @@
+1. ufw enable
+2. ufw disable
+3. ufw deny from 10.10.10.10  [ similar for allowing]
+4. ufw deny from 10.10.10.10/24
+5. On interface eth1: ufw deny in on eth1 from 10.10.10.10 [ similar for allow ]
+6. delete rule: sudo ufw delete allow from 10.10.10.10
+7. Show status: ufw status numbered
+8. Delete numbered [i.e serial order rule]: sudo ufw delete 1
+9. List application and its status: ufw app list
+10. Allow application: ufw allow "OpenSSH" [ hare OpenSSH came from ufw app list]
+11. Allow from [ip] [tcp only] on [port]: ufw allow from 10.10.10.10 proto tcp to any port 22
+12. Allow from [ip] on [port]: ufw allow from 10.10.10.10 to any port 22
+13. Allow nginx:
+    a. ufw app list | grep -i nginx
+    b. ufw allow "Nginx Full"
+14. UFW deny on port: ufw deny out 24
+15  ufw allow from 135.22.65.0/24 to any proto tcp port 9090,9091 [ for port mention port]

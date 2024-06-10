@@ -1,0 +1,15 @@
+1. Pod Security Standard and Pod Security Admission
+2. <mod>=<security standard>
+3. k label --dry-run=server --overwrite ns payroll pod-security.kubernetes.io/enforce=baseline
+opa    k get ns --selector='!pod-security.kubernetes.io/enforce'
+5. k -n kube-system exec -it  kube-apiserver-controlplane -- kube-apiserver -h | grep -i enable-admission
+6 pod-security.kubernetes.io/<MODE>: <LEVEL>   [search with pod security admission]
+    pod-security.kubernetes.io/<MODE>-version: <VERSION>
+7. Mode: warn,audit,enforce [WAE]
+8. Level: privileged,baseline,restriction [pbr]
+9. enforce  restricted
+   audit   baseline
+   warn   prvileged
+Remeber like this [warn,audit,enforce,privileged,baseline,restricted]
+10.To know the value give something randome level in mode warn/audit/enforce.Then it will give passoble level values.
+11.
