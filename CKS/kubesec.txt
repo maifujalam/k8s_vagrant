@@ -1,0 +1,9 @@
+1. kubesec binary has to be downloaded with wget <binary url of amd_64>
+2. copy binary /user/local/bin
+3. kubesec scan <k8s_yaml.yaml>
+led or pass with score4. It may be failed or pass with score.
+5. If failed:
+    a. Update Security Context:
+         privileged: false
+         allowPrivilegeEscalation: false
+         reaOnlyRootFileSystem: true

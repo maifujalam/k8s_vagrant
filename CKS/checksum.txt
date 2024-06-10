@@ -1,0 +1,3 @@
+1. wget https://dl.k8s.io/vX.Y.Z/kubernetes-server-linux-amd64.tar.gz
+2. sha256 /uar/local/bin
+3.
