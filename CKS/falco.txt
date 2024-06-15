@@ -23,4 +23,17 @@
 8. grep -ri -B 3 -A 3 "shell in"
 9. Grep reccursively in a folder with matching string and line number with starting and endoing 3 line:
    grep -ri -n -A 3 -B 3 "shell in"
-10.
+10. crictl ps -id
+11. crictl pods -id
+12. time : evt.time
+    time without nanoseconds: %evt.time.s
+    user-name: %user.name
+    user-id: %user.uid
+    container-id: %container.id
+    Container name: container.name
+    container-image: container.image
+    container-image-repository: container.image.repository
+    kubernetes namespace: k8s.ns.name
+    kubernetes pod name: k8s.pod.name
+ 13. Copy falco: cut -d " " -f 9 /opt/falco/raw-falco /opt/falco/falco-output.txt
+ 14.
