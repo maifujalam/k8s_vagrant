@@ -354,7 +354,7 @@ apt-get -y install linux-headers-$(uname -r)
 apt-get install -y falco
 
 # Set file output
-yq -i e '.file_output.filename = "/opt/falco.log" | .file_output.enabled = true' /etc/falco/falco.yaml
+yq -i e '.file_output.filename = "/opt/falco.log" | .file_output.enabled = true' /etc/falco/falco_questions.txt
 
 systemctl restart falco
 

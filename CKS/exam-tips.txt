@@ -2,4 +2,16 @@
     > right shift
     < left shift
 2. select + right clist to paste.
-3.
+3. After launch of the exam in terminal.
+    vi ~/.vimrc
+    set et
+    set ts=2
+    set sw=2
+4. Create macros
+    export do="--dry-run=client -o yaml"
+    export now="--force --grace-period 0"
+
+    Whenever required,use with $do ,$now.
+5.  Crictl:
+   Get container id: crictl ps -id=<container_id>
+   Get pod details: crictl pod -id=<pod_id>
