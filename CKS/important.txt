@@ -12,4 +12,6 @@
 12. Trivy: Scan deployment images with  vulnerability and remove deployments/pods]
 13. ETCD Cypher
 14. Network policy
-15. 
+15.
+
+16. Sample questions: https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/7-mock-exam-questions

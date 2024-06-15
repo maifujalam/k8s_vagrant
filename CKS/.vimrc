@@ -1,10 +1,10 @@
-set nu
-set ai
 set et
 set ts=2
-set paste
-
+set sw=2
 -------
+set ai
+set nu
+set paste
 set termguicolors
 execute pathogen#infect()
 syntax on
