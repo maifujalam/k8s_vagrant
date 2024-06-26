@@ -31,9 +31,7 @@ spec:
       targetLabel: target
     params:
       module:
-      - http_2xx
-      target:
-      - https://aion.internal.mum1-pp.zetaapps.in/aion/ping
+      - http_2x
     path: /probe
     port: http
     scheme: http
