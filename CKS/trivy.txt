@@ -8,4 +8,4 @@
     d. Know total vulnerability: trivy image nginx:1.20.2-alpine | head
     e. Scale deployment:
  5. trivy --input <any_container_archive>.tar
- 6.
+ 6. trivy image --severity HIGH,CRITICAL
