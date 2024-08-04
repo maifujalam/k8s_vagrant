@@ -89,7 +89,7 @@ printf "\nCooling down for 20 seconds...\n"
 
 ####################### Install Grafana ########################
 printf "\nInstalling Grafana Dashboard...\n"
-  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard -f /vagrant/manifests/kubernetes-dashboard/values.yaml'
+  su - vagrant -c 'helm -n monitoring install grafana /vagrant/manifests/grafana --create-namespace --namespace grafana -f /vagrant/manifests/grafana/values.yaml'
 
 printf "\nCooling down for 20 seconds...\n"
   sleep 20
