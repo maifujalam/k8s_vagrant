@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
     config.vm.box_check_update = false
     config.hostmanager.enabled = true
-    config.hostmanager.manage_host = false  # false to disable update '/etc/hosts' of host with guest VMs dns.
+    config.hostmanager.manage_host = true  # false to disable update '/etc/hosts' of host with guest VMs dns.
     config.hostmanager.manage_guest = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
