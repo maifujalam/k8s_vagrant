@@ -94,6 +94,9 @@ printf "\nInstalling Grafana Dashboard...\n"
 printf "\nCooling down for 20 seconds...\n"
   sleep 20
 
+printf "\nInstalling Local Storage Provisioner...\n"
+  su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'
+
 
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"

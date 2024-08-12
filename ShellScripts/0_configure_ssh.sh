@@ -46,7 +46,7 @@ if ping -c 2 $BASEOS&> /dev/null ;then
   echo "$BASEOS is reachable"
   ####### Configure MASTER #######
   # Remove any known host of MASTER
-  ssh-keygen -f "/home/alam/.ssh/known_hosts" -R $BASEOS &> /dev/null
+  ssh-keygen -f "~/.ssh/known_hosts" -R $BASEOS &> /dev/null
   # Add MASTER fingerprint to known host
   (ssh-keyscan $BASEOS >> ~/.ssh/known_hosts) &> /dev/null
   # Copying ssh public keys to servers
@@ -62,7 +62,7 @@ if ping -c 2 $MASTER &> /dev/null ;then
   echo "$MASTER is reachable"
   ####### Configure MASTER #######
   # Remove any known host of MASTER
-  ssh-keygen -f "/home/alam/.ssh/known_hosts" -R $MASTER &> /dev/null
+  ssh-keygen -f "~/.ssh/known_hosts" -R $MASTER &> /dev/null
   # Add MASTER fingerprint to known host
   (ssh-keyscan $MASTER >> ~/.ssh/known_hosts) &> /dev/null
   # Copying ssh public keys to servers
@@ -78,7 +78,7 @@ if ping -c 2 $WORKER1 &> /dev/null ;then
   echo "$WORKER1 is Reachable"
   ####### Configure WORKER1 #######
   # Remove any known host of WORKER1
-  ssh-keygen -f "/home/alam/.ssh/known_hosts" -R $WORKER1 &> /dev/null
+  ssh-keygen -f "~/.ssh/known_hosts" -R $WORKER1 &> /dev/null
   # Add WORKER1 fingerprint to known host
   (ssh-keyscan $WORKER1 >> ~/.ssh/known_hosts) &> /dev/null
   # Copying ssh public keys to servers
@@ -94,7 +94,7 @@ if ping -c 2 $WORKER2 &> /dev/null ;then
   echo "$WORKER2 is reachable"
   ####### Configure WORKER2 #######
   # Remove any known host of WORKER2
-  ssh-keygen -f "/home/alam/.ssh/known_hosts" -R $WORKER2 &> /dev/null
+  ssh-keygen -f "~/.ssh/known_hosts" -R $WORKER2 &> /dev/null
   # Add MASTER fingerprint to known host
   (ssh-keyscan $WORKER2 >> ~/.ssh/known_hosts) &> /dev/null
   # Store PASSWORD for WORKER2
