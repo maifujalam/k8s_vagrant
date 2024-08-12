@@ -2517,7 +2517,10 @@ prometheusOperator:
       podAnnotations: {}
       nodeSelector: {}
       affinity: {}
-      tolerations: []
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
 
       ## SecurityContext holds pod-level security attributes and common container settings.
       ## This defaults to non root user with uid 2000 and gid 2000. *v1.PodSecurityContext  false
