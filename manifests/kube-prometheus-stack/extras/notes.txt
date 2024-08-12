@@ -1,8 +1,0 @@
-1. in kube-prometheous-stack values.yml file
-line 3422
-    probeSelector:
-      matchLabels:
-         httpprobecreator/probe: blackbox-exporter
-
-it selects all probe with above mentioned label only.
-2. probeSelectorNilUsesHelmValues: true This will select all probres in helm if left blank.
