@@ -85,8 +85,8 @@ printf "\nCooling down for 5 sec..\n"
 printf "\nInstalling KubePrometheusStack..\n"
   su - vagrant -c 'helm -n monitoring install prometheus /vagrant/manifests/kube-prometheus-stack --create-namespace'
 
-printf "\nCooling down for 20 seconds...\n"
-  sleep 10
+printf "\nCooling down for 30 seconds...\n"
+  sleep 30
 
 ######################## Install Grafana ########################
 #printf "\nInstalling Grafana Dashboard...\n"
