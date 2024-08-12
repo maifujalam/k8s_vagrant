@@ -58,7 +58,7 @@ kube-prometheous-stack
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 2. helm repo update
 3. helm search repo kube-prometheus-stack
-4. helm pull prometheus-community/kube-prometheus-stack --version=56.6.2 --untar
+4. helm pull prometheus-community/kube-prometheus-stack --version=61.8.0 --untar
 5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace
 6. helm -n monitoring uninstall kube-prometheus-stack
 7. helm -n monitoring upgrade kube-prometheus-stack kube-prometheus-stack 
@@ -79,9 +79,9 @@ Grafana[not required if using kube prometheous stack]:-
 2. helm repo update
 3. helm search repo grafana
 4. helm pull grafana/grafana --version=7.2.5 --untar
-5. helm -n monitoring install grafana grafana --create-namespace
-6. helm -n monitoring upgrade grafana grafana --create-namespace
-7. helm -n monitoring uninstall grafana
+5. helm -n grafana install grafana grafana --create-namespace
+6. helm -n grafana upgrade grafana grafana --create-namespace
+7. helm -n grafana uninstall grafana
 8. Default pass admin/admin
 
 Docker Registry:-

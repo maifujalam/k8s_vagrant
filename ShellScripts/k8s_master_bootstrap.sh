@@ -72,7 +72,8 @@ printf "\nCooling down for 20 seconds...\n"
 
 ####################### Create k8s-dashboard user ########################
 printf "\n Extracting dashboard token\n"
-  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user --duration=8760h > /vagrant/dashboard_token.txt'
+  su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
+  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user > /vagrant/dashboard_token.txt'
 
 printf "\nAppend token in kubeconfig file.\n"
   su - vagrant -c 'sed -i "/client-key-data/a\    token: $(cat /vagrant/dashboard_token.txt)" /vagrant/config'
@@ -80,19 +81,19 @@ printf "\nAppend token in kubeconfig file.\n"
 printf "\nCooling down for 5 sec..\n"
   sleep 5
 
-####################### Install Prometheus ########################
-printf "\nInstalling Prometheus..\n"
-  su - vagrant -c 'helm -n monitoring install prometheus /vagrant/manifests/prometheus --create-namespace'
+####################### Install Kube Prometheus Stack ########################
+printf "\nInstalling KubePrometheusStack..\n"
+  su - vagrant -c 'helm -n monitoring install prometheus /vagrant/manifests/kube-prometheus-stack --create-namespace'
 
 printf "\nCooling down for 20 seconds...\n"
   sleep 10
 
-####################### Install Grafana ########################
-printf "\nInstalling Grafana Dashboard...\n"
-  su - vagrant -c 'helm -n monitoring install grafana /vagrant/manifests/grafana --create-namespace --namespace grafana -f /vagrant/manifests/grafana/values.yaml'
-
-printf "\nCooling down for 20 seconds...\n"
-  sleep 20
+######################## Install Grafana ########################
+#printf "\nInstalling Grafana Dashboard...\n"
+#  su - vagrant -c 'helm -n monitoring install grafana /vagrant/manifests/grafana --create-namespace --namespace grafana -f /vagrant/manifests/grafana/values.yaml'
+#
+#printf "\nCooling down for 20 seconds...\n"
+#  sleep 20
 
 printf "\nInstalling Local Storage Provisioner...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'

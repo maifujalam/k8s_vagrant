@@ -32,3 +32,4 @@ alias v=vagrant.exe
 alias vs='v status'
 alias vdf='v destroy -f'
 alias vup='v up'
+alias vht='v halt'
