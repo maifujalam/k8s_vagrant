@@ -831,7 +831,10 @@ alertmanager:
     ## If specified, the pod's tolerations.
     ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
     ##
-    tolerations: []
+    tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Exists
     # - key: "key"
     #   operator: "Equal"
     #   value: "value"
@@ -2447,7 +2450,10 @@ prometheusOperator:
       ## Tolerations for use with node taints
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations: []
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
       # - key: "key"
       #   operator: "Equal"
       #   value: "value"
