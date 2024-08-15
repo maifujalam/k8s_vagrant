@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
     config.vm.box_version = BOX_VERSION
     config.vm.network "private_network", ip: IP_VM , hostname: true
     config.vm.hostname = VM
+    config.vm.define VM   # Define the vagrant box name(fix the issue of default name)
     config.vm.provision "shell", inline: <<-SHELL
         sh /vagrant/ShellScripts/update_ssh_config.sh
         #sh /vagrant/ShellScripts/register_system_redhat.sh
