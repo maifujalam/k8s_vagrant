@@ -1,16 +1,16 @@
 #!/bin/bash
 
-KUBERNETES_VERSION=1.29.0-0
+KUBERNETES_VERSION=1.30.4
 if [ $# -gt 0 ]; then
   KUBERNETES_VERSION="$1"
 fi
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+baseurl=https://pkgs.kubernetes.io/core:/stable:/v1.30/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.kubernetes.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 EOF
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum clean all
@@ -18,7 +18,7 @@ sudo yum clean all
 PACKAGE_DIRECTORY="/vagrant/packages/"
 if [ ! -d $PACKAGE_DIRECTORY ] ;then
   printf "Directory not present.Downloading Packages\n"
-  sudo yum install -y containerd kubelet-$KUBERNETES_VERSION kubeadm-$KUBERNETES_VERSION kubectl-$KUBERNETES_VERSION --downloadonly --downloaddir=/vagrant/packages/.
+  sPACKAGE_DIRECTORY="/vagrant/packages/"
 fi
 
 if [ -d "$PACKAGE_DIRECTORY" ] && [ -z "$(ls -A $PACKAGE_DIRECTORY)" ]; then

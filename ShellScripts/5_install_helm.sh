@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v3.12.2"
+VERSION="v3.15.4"
 printf "Installing Helm $VERSION\n"
 if [[ ! -f /vagrant/ShellScripts/helm-$VERSION-linux-amd64.tar.gz ]];then
   echo "Downloading Binary.."
