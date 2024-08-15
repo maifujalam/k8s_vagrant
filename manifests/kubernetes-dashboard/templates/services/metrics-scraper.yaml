@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- if and .Values.metricsScraper.enabled (eq .Values.app.mode "dashboard") }}
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -20,15 +22,14 @@ metadata:
     app.kubernetes.io/name: {{ template "kubernetes-dashboard.name" . }}-{{ .Values.metricsScraper.role }}
     app.kubernetes.io/version: {{ .Values.metricsScraper.image.tag }}
     app.kubernetes.io/component: {{ .Values.metricsScraper.role }}
-    # TODO: kubernetes-dashboard-metrics-scraper name is currently hardcoded into the API.
-    # Use same name pattern as for other deployments when this will be configurable via the API.
-  name: kubernetes-dashboard-{{ .Values.metricsScraper.role }}
+  name: {{ template "kubernetes-dashboard.metrics-scraper.name" . }}
 spec:
   ports:
     {{- with (index .Values.metricsScraper.containers.ports 0) }}
     - port: {{ .containerPort }}
-      targetPort: {{ .containerPort }}
     {{- end }}
   selector:
     {{- include "kubernetes-dashboard.matchLabels" . | nindent 4 }}
     app.kubernetes.io/name: {{ template "kubernetes-dashboard.name" . }}-{{ .Values.metricsScraper.role }}
+
+{{- end -}}

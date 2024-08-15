@@ -11,3 +11,11 @@
       allowPrivilegedEscalation: true [ any one]
 6. privileged and capabilities are only applicable at container level not pod level.
 7.
+
+privileged
+runAsNonRoot
+allowPrivilegedEscalation
+
+
+privileged
+runAsNonRoot
