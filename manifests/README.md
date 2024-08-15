@@ -48,9 +48,10 @@ kubernetes-dashboard:
 1. helm repo add kubernetes-dashboard  https://kubernetes.github.io/dashboard
 2. helm repo update
 3. helm search repo dashboard 
-4. helm pull kubernetes-dashboard/kubernetes-dashboard --version=7.5.0 --untar
+4. helm pull k8s-dashboard/kubernetes-dashboard --version=7.5.0 --untar
 5. kubectl create ns kubernetes-dashboard
-6. helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard
+6. helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard OR
+    helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard --create-namespace
 7. helm -n kubernetes-dashboard upgrade k8s-dashboard kubernetes-dashboard
 8. helm uninstall k8s-dashboard -n kubernetes-dashboard
 
