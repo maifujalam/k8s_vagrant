@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/kube-vip/kube-vip-cloud-provider
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.0.7"
+  tag: "v0.0.10"
 
 resources:
   requests:
