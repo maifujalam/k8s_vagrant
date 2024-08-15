@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "\nConfiguring crictl\n"
 #### Download crictl #######
-VERSION="v1.27.1"
+VERSION="v1.30.1"
 if [[ ! -f  /vagrant/ShellScripts/crictl-$VERSION-linux-amd64.tar.gz ]];then
   printf "Downloading crictl binary"
   wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-$VERSION-linux-amd64.tar.gz
