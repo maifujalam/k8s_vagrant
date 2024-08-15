@@ -1,6 +1,6 @@
 IMAGE_NAME = "skmaifujalam/k8s-1.27.4"    # Base image of VM which is vagrant box of RHEL 9 as default. generic/rhel9
 BOX_VERSION = "1.0"               # Base image version of above image as, 4.2.16
-NW = 2                          # Specify the the numbers of worker VMs to create (Example:- 2,3,4)
+NW = 1                          # Specify the the numbers of worker VMs to create (Example:- 2,3,4)
 NM = 1                          # Specify number of master vms to create(Example:-3,4,5 but minimum 3)
 MASTER = "master"               # Name of Master VM
 WORKER = "worker"                # Names of worker VMs(worker vms will be named as worker1,worker2,worker3 ... )
@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
     config.vm.box_check_update = false
     config.hostmanager.enabled = true
-    config.hostmanager.manage_host = false  # false to disable update '/etc/hosts' of host with guest VMs dns.
+    config.hostmanager.manage_host = true  # false to disable update '/etc/hosts' of host with guest VMs dns.
     config.hostmanager.manage_guest = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true

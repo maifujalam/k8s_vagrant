@@ -1,0 +1,35 @@
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+  . /usr/share/git/completion/git-completion.bash
+  fi
+
+  if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+              . /usr/share/git/completion/git-prompt.sh
+  fi
+#auto_complete on
+alias k=kubectl
+complete -F __start_kubectl k
+source <(kubectl completion bash)
+
+alias tf=terraform.exe
+alias tfa='tf apply'
+alias tfd='tf destroy'
+alias tfaf='tfa -auto-approve'
+alias tfdf='tfd -auto-approve'
+alias tfp='tf plan'
+complete -C /usr/bin/terraform terraform
+
+export SSHPASS=vagrant
+alias master='ssh -o ServerAliveInterval=5 vagrant@master'
+alias worker1='ssh -o ServerAliveInterval=5 vagrant@worker1'
+alias worker2='ssh -o ServerAliveInterval=5 vagrant@worker2'
+
+source <(helm.exe completion bash)
+alias h='helm.exe'
+alias hl='h list -A'
+alias ht='h template . --output-dir abc'
+
+alias v=vagrant.exe
+alias vs='v status'
+alias vdf='v destroy -f'
+alias vup='v up'
+alias vht='v halt'
