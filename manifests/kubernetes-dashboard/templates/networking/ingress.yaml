@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- if .Values.app.ingress.enabled }}
-{{- if not (or (eq .Values.app.ingress.issuer.scope "disabled") (eq .Values.app.ingress.issuer.scope "default") (eq .Values.app.ingress.issuer.scope "cluster")) }}
-{{- fail "value of .Values.app.ingress.issuer.scope must be one of [default, cluster]"}}
-{{- end }}
+{{- if and .Values.app.ingress.enabled (eq .Values.app.mode "dashboard")}}
+{{- include "kubernetes-dashboard.validate.ingressIssuerScope" $ }}
 
 kind: Ingress
 apiVersion: networking.k8s.io/v1
@@ -32,20 +30,31 @@ metadata:
     {{- if eq .Values.app.ingress.issuer.scope "cluster" }}
     cert-manager.io/cluster-issuer: {{ .Values.app.ingress.issuer.name }}
     {{- end }}
-    {{- if eq .Values.app.ingress.ingressClassName "internal-nginx" }}
+    {{- if .Values.app.ingress.useDefaultAnnotations }}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    {{- end }}
+    {{- if not (eq .Values.app.ingress.path "/") }}
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     {{- end }}
     {{- with .Values.app.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
   name: {{ template "kubernetes-dashboard.name" . }}
 spec:
+  {{- if not .Values.app.ingress.useDefaultIngressClass }}
   ingressClassName: {{ .Values.app.ingress.ingressClassName }}
-  {{- if .Values.app.ingress.hosts }}
+  {{- end }}
+  {{- if and .Values.app.ingress.hosts .Values.app.ingress.tls.enabled }}
   tls:
     - hosts:
       {{- toYaml .Values.app.ingress.hosts | nindent 6 }}
-      secretName: {{ .Values.app.ingress.secretName }}
+      {{- if .Values.app.ingress.tls.secretName }}
+      secretName: {{ .Values.app.ingress.tls.secretName }}
+      {{- else }}
+      secretName: {{ template "kubernetes-dashboard.app.ingress.secret.name" . }}
+      {{- end }}
   {{- end }}
   rules:
     {{- if .Values.app.ingress.hosts }}
@@ -53,37 +62,27 @@ spec:
     - host: {{ $host }}
       http:
         paths:
-          - path: {{ $.Values.app.ingress.paths.web }}
+        {{- if not (eq $.Values.app.ingress.path "/") }}
+          - path: {{ $.Values.app.ingress.path }}(/|$)(.*)
+        {{- else }}
+          - path: {{ $.Values.app.ingress.path }}
+        {{- end }}
             pathType: {{ $.Values.app.ingress.pathType }}
             backend:
               service:
-                name: {{ template "kubernetes-dashboard.fullname" $ }}-{{ $.Values.web.role }}
+                name: {{ template "kong.fullname" (index $.Subcharts "kong") }}-proxy
                 port:
-                  name: {{ $.Values.web.role }}
-          - path: {{ $.Values.app.ingress.paths.api }}
-            pathType: {{ $.Values.app.ingress.pathType }}
-            backend:
-              service:
-                name: {{ template "kubernetes-dashboard.fullname" $ }}-{{ $.Values.api.role }}
-                port:
-                  name: {{ $.Values.api.role }}
+                  number: {{ $.Values.kong.proxy.tls.servicePort }}
     {{- end }}
     {{- else }}
     - http:
         paths:
-          - path: {{ .Values.app.ingress.paths.web }}
+          - path: {{ .Values.app.ingress.path }}
             pathType: {{ .Values.app.ingress.pathType }}
             backend:
               service:
-                name: {{ template "kubernetes-dashboard.fullname" $ }}-{{ .Values.web.role }}
+                name: {{ template "kong.fullname" (index $.Subcharts "kong") }}-proxy
                 port:
-                  name: {{ .Values.web.role }}
-          - path: {{ .Values.app.ingress.paths.api }}
-            pathType: {{ .Values.app.ingress.pathType }}
-            backend:
-              service:
-                name: {{ template "kubernetes-dashboard.fullname" $ }}-{{ .Values.api.role }}
-                port:
-                  name: {{ .Values.api.role }}
+                  number: {{ $.Values.kong.proxy.tls.servicePort }}
     {{- end }}
 {{- end }}

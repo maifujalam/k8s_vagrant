@@ -35,5 +35,7 @@
     container-image-repository: container.image.repository
     kubernetes namespace: k8s.ns.name
     kubernetes pod name: k8s.pod.name
- 13. Copy falco: cut -d " " -f 9 /opt/falco/raw-falco /opt/falco/falco-output.txt
+    command: proc.cmdline
+ 13.
+ 13.
  14.
