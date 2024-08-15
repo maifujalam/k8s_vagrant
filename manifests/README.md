@@ -50,7 +50,7 @@ kubernetes-dashboard:
 3. helm search repo dashboard 
 4. helm pull k8s-dashboard/kubernetes-dashboard --version=7.5.0 --untar
 5. kubectl create ns kubernetes-dashboard
-6. helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard OR
+6. helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard ---create-namespace --namespace kubernetes-dashboard
     helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard --create-namespace
 7. helm -n kubernetes-dashboard upgrade k8s-dashboard kubernetes-dashboard
 8. helm uninstall k8s-dashboard -n kubernetes-dashboard
