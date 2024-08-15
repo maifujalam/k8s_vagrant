@@ -10,3 +10,9 @@ After Packer Created Box successfully:-
 2. Start creating k8s cluster with this packer created box.
 
 
+https://www.downloadkubernetes.com/
+
+Packer Build:-
+1. packer init k8s.pkr.hcl
+2. packer validate k8s.pkr.hcl
+3. packer build --force k8s.pkr.hcl

@@ -10,4 +10,4 @@ swapoff -a
 sed -i.bak '/swap/ s/^/#/' /etc/fstab
 # Disable swap permanently
 sudo systemctl disable --now firewalld
-printf "Firewall and Selinux config Completed"
+printf "\nFirewall and Selinux config Completed.\n"
