@@ -1,6 +1,6 @@
 ############ Set SELINUX to Permissiove ######
 # Set SELinux in permissive mode (effectively disabling it)
-printf "Configuring Firewalld"
+printf "\n\nConfiguring Firewalld.\n\n"
 sudo setenforce 0
 #sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
@@ -10,4 +10,4 @@ swapoff -a
 sed -i.bak '/swap/ s/^/#/' /etc/fstab
 # Disable swap permanently
 sudo systemctl disable --now firewalld
-printf "\nFirewall and Selinux config Completed.\n"
+printf "\n\nFirewall and Selinux config Completed.\n\n"
