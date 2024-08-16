@@ -85,3 +85,7 @@ b. Install all the rpms downloaded above and preconfigure base image:-
 ## Authors
 
 - [@SkMaifujAlam](https://github.com/maifujalam)
+
+# Release Notes  
+### Date:- 16/08/2024
+Updated kubernetes to v1.30.4 in vagrant box skmaifujalam/k8s-1.30.4 
