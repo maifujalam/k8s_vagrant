@@ -22,6 +22,8 @@ sudo rpm -Uhv /vagrant/packages/*.rpm
 printf "\nVerifying Binary...\n"
 containerd -v
 sudo systemctl enable --now containerd.service
+sudo systemctl restart containerd
+systemctl status containerd
 
 ########### Kubelet #############
 kubelet --version

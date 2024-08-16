@@ -102,5 +102,5 @@ printf "\nInstalling Local Storage Provisioner...\n"
 
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"
-  su - vagrant -c 'sh /vagrant/ShellScripts/6.configure_kubectl.sh'
+  su - vagrant -c 'sh /vagrant/ShellScripts/6_configure_kubectl.sh'
 printf "\n-------K8s master Initialized Successfully-----\n"

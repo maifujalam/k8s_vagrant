@@ -1,6 +1,6 @@
 #!/bin/bash
 ################ Linux Kernel Module ########################
-echo "Add linux kernel modules..."
+printf "\n\nAdd linux kernel modules...\n"
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
   overlay
   br_netfilter
@@ -22,6 +22,6 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 #su - vagrant -c "sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward"
-printf "\nNetwork Configuration Completed...\n"
+printf "\n\nNetwork Configuration Completed...\n\n"
 printf "Stopping for 5 sec\n"
 sleep 5
