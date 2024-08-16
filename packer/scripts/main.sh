@@ -7,4 +7,5 @@ sudo sh /vagrant/ShellScripts/4_copy_bins.sh
 sudo sh /vagrant/ShellScripts/config_crictl.sh
 sudo sh /vagrant/ShellScripts/5_kubernetes_images.sh
 sudo sh /vagrant/ShellScripts/6_configure_kubectl.sh
+sudo sh /vagrant/ShellScripts/7_pull_images.sh
 echo "/n/n Build Successful.  /n/n"
