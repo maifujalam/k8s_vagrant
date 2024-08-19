@@ -89,9 +89,6 @@ extraContainers: []
 #       - -openshift-delegate-urls={"/":{"group":"monitoring.coreos.com","resource":"prometheuses","verb":"get"}}
 #     image: {{ .Values.global.imageRegistry }}/openshift/oauth-proxy:v1.1.0
 
-## Enable pod security policy
-pspEnabled: true
-
 hostNetwork: false
 
 strategy:
@@ -162,24 +159,14 @@ configExistingSecretName: ""
 # Store the configuration as a `Secret` instead of a `ConfigMap`, useful in case it contains sensitive data
 secretConfig: false
 config:
-#  modules:
-#     http_2xx:
-#       prober: http
-#       timeout: 5s
-#       http:
-#         valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-#         follow_redirects: true
-#         preferred_ip_protocol: "ip4"
-    modules:
-      http_2xx:
-        prober: http
-        timeout: 5s
-        http:
-          valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-          valid_status_codes: [200,403]  # Defaults to 2xx
-          method: GET
-          follow_redirects: true
-          preferred_ip_protocol: "ip4" # defaults to "ip6"
+  modules:
+    http_2xx:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+        follow_redirects: true
+        preferred_ip_protocol: "ip4"
 
 # Set custom config path, other than default /config/blackbox.yaml. If let empty, path will be "/config/blackbox.yaml"
 # configPath: "/foo/bar"
@@ -223,6 +210,10 @@ service:
 # https://github.com/prometheus/blackbox_exporter/blob/998037b5b40c1de5fee348ffdea8820509d85171/main.go#L55
 containerPort: 9115
 
+# Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If zero, no port is exposed.
+# This is useful for communicating with Daemon Pods when kind is DaemonSet.
+hostPort: 0
+
 serviceAccount:
   # Specifies whether a ServiceAccount should be created
   create: true
@@ -249,12 +240,18 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+      - secretName: chart-example-tls
+        hosts:
+          - blackbox.master.com
 
 podAnnotations: {}
+
+# Annotations for the Deployment
+deploymentAnnotations: {}
+
+# Annotations for the Secret
+secretAnnotations: {}
 
 # Hostaliases allow to add additional DNS entries to be injected directly into pods.
 # This will take precedence over your implemented DNS solution
@@ -282,8 +279,12 @@ serviceMonitor:
     additionalRelabeling: []
     labels: {}
     path: /metrics
+    scheme: http
+    tlsConfig: {}
     interval: 30s
     scrapeTimeout: 30s
+    ## Port can be defined by assigning a value for the port key below
+    ## port:
 
   ## If true, a ServiceMonitor CRD is created for a prometheus operator
   ## https://github.com/coreos/prometheus-operator for each target
@@ -428,7 +429,7 @@ verticalPodAutoscaler:
     updateMode: Auto
 
 configReloader:
-  enabled: false
+  enabled: true
   containerPort: 8080
   config:
     logFormat: logfmt
@@ -471,5 +472,7 @@ configReloader:
       additionalMetricsRelabels: {}
       additionalRelabeling: []
       path: /metrics
+      scheme: http
+      tlsConfig: {}
       interval: 30s
       scrapeTimeout: 30s

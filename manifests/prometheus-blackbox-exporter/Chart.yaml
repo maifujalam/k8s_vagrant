@@ -1,11 +1,12 @@
 apiVersion: v2
-appVersion: v0.24.0
+appVersion: v0.25.0
 description: Prometheus Blackbox Exporter
 home: https://github.com/prometheus/blackbox_exporter
 keywords:
 - prometheus
 - blackbox
 - monitoring
+kubeVersion: '>=1.21.0-0'
 maintainers:
 - email: cedric@desaintmartin.fr
   name: desaintmartin
@@ -20,4 +21,4 @@ sources:
 - https://github.com/prometheus/blackbox_exporter
 - https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-blackbox-exporter
 type: application
-version: 8.10.1
+version: 9.0.0

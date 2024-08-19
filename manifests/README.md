@@ -1,12 +1,13 @@
 Install Metric Server:-
 
 1. helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-2.  h search repo metric
-3. h pull metrics-server/metrics-server  --version 3.11.0 --untar
-4. Update values.yaml
-5. helm install metrics-server metrics-server -n kube-system --values metrics-server/values.yaml
-6. helm upgrade metrics-server /vagrant/manifests/metrics-server -n kube-system --values /vagrant/manifests/metrics-server/values1.yaml
-7. helm -n kube-system uninstall metrics-server
+2. helm repo update
+3. helm search repo metrics-server
+4. helm pull metrics-server/metrics-server --version 3.12.1 --untar
+5. Update values.yaml
+6. helm install metrics-server metrics-server -n kube-system --values metrics-server/values.yaml
+7. helm upgrade metrics-server /vagrant/manifests/metrics-server -n kube-system --values /vagrant/manifests/metrics-server/values1.yaml
+8. helm -n kube-system uninstall metrics-server
 
 kube-vip:- 
 1. helm repo add kube-vip https://kube-vip.github.io/helm-charts 
@@ -24,9 +25,11 @@ Cert-manager:-
 1. helm repo add jetstack https://charts.jetstack.io
 2. helm repo update
 3. helm search repo cert-manager
-4. helm pull jetstack/cert-manager --version=1.12.3 --untar
+4. helm pull jetstack/cert-manager --version=1.15.3 --untar
 5. kubectl create ns cert-manager
-6. helm install cert-manager cert-manager -n cert-manager --values cert-manager/values1.yaml
+6. helm install cert-manager cert-manager -n cert-manager
+7. helm -n cert-manager upgrade cert-manager
+8. helm -n cert-manager uninstall cert-manager
 
 trust-manager:-
 1. helm repo add jetstack https://charts.jetstack.io
@@ -38,7 +41,7 @@ nginx-ingress-controller
 1. helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 2. helm repo update
 3. helm search repo nginx
-4. helm pull ingress-nginx/ingress-nginx --version=4.7.1 --untar
+4. helm pull ingress-nginx/ingress-nginx --version=4.11.2 --untar
 5. kubectl create ns ingress-nginx
 6. helm install ingress-nginx ingress-nginx -n ingress-nginx -f ingress-nginx/values1.yaml
 7. helm uninstall ingress-nginx -n ingress-nginx
@@ -50,7 +53,7 @@ kubernetes-dashboard:
 3. helm search repo dashboard 
 4. helm pull k8s-dashboard/kubernetes-dashboard --version=7.5.0 --untar
 5. kubectl create ns kubernetes-dashboard
-6. helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard ---create-namespace --namespace kubernetes-dashboard
+6. helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
     helm install k8s-dashboard  kubernetes-dashboard -n kubernetes-dashboard --create-namespace
 7. helm -n kubernetes-dashboard upgrade k8s-dashboard kubernetes-dashboard
 8. helm uninstall k8s-dashboard -n kubernetes-dashboard
@@ -98,10 +101,19 @@ Docker Registry:-
 Blackbox Exporter:-
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 2. helm search repo blackbox
-3. helm pull prometheus-community/prometheus-blackbox-exporter --version=8.10.1 --untar
+3. helm pull prometheus-community/prometheus-blackbox-exporter --version=9.0.0 --untar
 4. helm -n blackbox-exporter install blackbox prometheus-blackbox-exporter --create-namespace
 5. helm -n blackbox-exporter upgrade blackbox prometheus-blackbox-exporte
 6. helm -n blackbox-exporter uninstall blackbox
+
+Argocd:
+1. helm repo add argo https://argoproj.github.io/argo-helm
+2. helm repo update
+3. helm search repo argo-cd
+4. helm pull argo/argo-cd --version 7.4.3 --untar
+5. helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd
+6. helm -n argo-cd uninstall argo-cd
+7. helm -n argo-cd upgrade argo-cd /vagrant/manifests/argo-cd
 
 hello-kubernetes:-
 1. helm install helloworld hello-kubernetes

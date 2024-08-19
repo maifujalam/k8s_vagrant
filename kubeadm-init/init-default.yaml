@@ -20,7 +20,7 @@ nodeRegistration:
 # imageRepository: It will be registry.k8s.io NOT k8s.gcr.io
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
-kubernetesVersion: 1.27.4
+kubernetesVersion: 1.30.4
 clusterName: local-k8s
 controlPlaneEndpoint: master:6443
 apiServer:
