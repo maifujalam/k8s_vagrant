@@ -32,7 +32,7 @@ sleep 5
 
 ####################### Install Metric Server ########################
 printf "\nInstalling metric server...\n"
-   su - vagrant -c 'helm -n kube-system install metrics-server /vagrant/manifests/metrics-server -f /vagrant/manifests/metrics-server/values1.yaml '
+   su - vagrant -c 'helm -n kube-system install metrics-server /vagrant/manifests/metrics-server'
 
 printf "\nCooling down for 5 seconds...\n"
 sleep 5
@@ -49,7 +49,8 @@ sleep 5
 ##################### Install Metric Server ########################
 
 printf "\nInstalling cert-manager...\n"
-   su - vagrant -c 'helm -n cert-manager install cert-manager --create-namespace --namespace cert-manager /vagrant/manifests/cert-manager -f /vagrant/manifests/cert-manager/values1.yaml'
+   su - vagrant -c 'helm -n cert-manager install cert-manager --create-namespace --namespace cert-manager /vagrant/manifests/cert-manager'
+   su - vagrant -c "kubectl apply -f /vagrant/manifests/cert-manager/self-sign-issuer.yaml "
 
 printf "\nCooling down for 5 seconds...\n"
 sleep 5
@@ -57,10 +58,10 @@ sleep 5
 ####################### Install ingress-nginx ########################
 
 printf "\nInstalling ingress-nginx...\n"
-   su - vagrant -c 'helm -n ingress-nginx install ingress-nginx --create-namespace --namespace ingress-nginx /vagrant/manifests/ingress-nginx -f /vagrant/manifests/ingress-nginx/values1.yaml'
+   su - vagrant -c 'helm -n ingress-nginx install ingress-nginx --create-namespace --namespace ingress-nginx /vagrant/manifests/ingress-nginx'
 
-printf "\nCooling down for 90 seconds...\n"
-  sleep 90
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 
 ####################### Install k8s-dashboard########################
 
@@ -68,8 +69,8 @@ printf "\nInstalling k8s Dashboard...\n"
   #su - vagrant -c 'kubectl create ns kubernetes-dashboard'
   su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard'
 
-printf "\nCooling down for 20 seconds...\n"
-  sleep 20
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 
 ####################### Create k8s-dashboard user ########################
 printf "\n Extracting dashboard token\n"
@@ -84,22 +85,29 @@ printf "\nCooling down for 5 sec..\n"
 
 ####################### Install Kube Prometheus Stack ########################
 printf "\nInstalling KubePrometheusStack..\n"
-  su - vagrant -c 'helm -n monitoring install prometheus /vagrant/manifests/kube-prometheus-stack --create-namespace'
+  su - vagrant -c 'helm -n monitoring install kube-prometheus-stack /vagrant/manifests/kube-prometheus-stack --create-namespace'
 
-printf "\nCooling down for 30 seconds...\n"
-  sleep 30
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 
-######################## Install Grafana ########################
-#printf "\nInstalling Grafana Dashboard...\n"
-#  su - vagrant -c 'helm -n monitoring install grafana /vagrant/manifests/grafana --create-namespace --namespace grafana -f /vagrant/manifests/grafana/values.yaml'
-#
-#printf "\nCooling down for 20 seconds...\n"
-#  sleep 20
+####################### Install Grafana ########################
+printf "\nInstalling Prometheus Blackbox-Exporter..\n"
+  su - vagrant -c 'helm -n monitoring install prometheus-blackbox-exporter /vagrant/manifests/prometheus-blackbox-exporter'
+
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 
 printf "\nInstalling Local Storage Provisioner...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'
 
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 
+printf "\nInstalling ArgoCD...\n"
+su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
+
+printf "\nCooling down for 5 seconds...\n"
+  sleep 5
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"
   su - vagrant -c 'sh /vagrant/ShellScripts/6_configure_kubectl.sh'

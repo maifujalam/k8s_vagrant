@@ -394,7 +394,7 @@ alertmanager:
     ingressClassName: nginx
 
     annotations:
-      cert-manager.io/issuer: "selfsigned"
+      cert-manager.io/issuer: "selfsigned-cluster-issuer"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -467,7 +467,10 @@ alertmanager:
 
     ## Secret name containing the TLS certificate for alertmanager per replica ingress
     ## Secret must be manually created in the namespace
-    tlsSecretName: ""
+    tlsSecretName:
+     - secretName: alertmanager-general-tls
+       hosts:
+       - alertmanager.master.com
 
     ## Separated secret for each per replica Ingress. Can be used together with cert-manager
     ##
@@ -1000,7 +1003,7 @@ grafana:
     ## Annotations for Grafana Ingress
     ##
     annotations:
-      cert-manager.io/issuer: selfsigned
+      cert-manager.io/issuer: selfsigned-cluster-issuer
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -2565,15 +2568,15 @@ prometheusOperator:
 
     # Use certmanager to generate webhook certs
     certManager:
-      enabled: false
+      enabled: true
       # self-signed root certificate
       rootCert:
         duration: ""  # default to be 5y
       admissionCert:
         duration: ""  # default to be 1y
-      # issuerRef:
-      #   name: "issuer"
-      #   kind: "ClusterIssuer"
+      issuerRef:
+        name: "selfsigned-cluster-issuer"
+        kind: "ClusterIssuer"
 
   ## Namespaces to scope the interaction of the Prometheus Operator and the apiserver (allow list).
   ## This is mutually exclusive with denyNamespaces. Setting this to an empty object will disable the configuration
@@ -3275,7 +3278,7 @@ prometheus:
     ingressClassName: nginx
 
     annotations:
-      cert-manager.io/issuer: "selfsigned"
+      cert-manager.io/issuer: "selfsigned-cluster-issuer"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
