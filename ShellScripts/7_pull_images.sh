@@ -1,4 +1,8 @@
 #!/bin/bash
+crictl pull quay.io/jetstack/cert-manager-controller:v1.15.3
+crictl pull quay.io/jetstack/cert-manager-startupapicheck:v1.15.3
+crictl pull quay.io/jetstack/cert-manager-webhook:v1.15.3
+crictl pull registry.k8s.io/ingress-nginx/controller:v1.11.2@sha256:d5f8217feeac4887cb1ed21f27c2674e58be06bd8f5184cacea2a69abaf78dce
 crictl pull docker.io/kubernetesui/dashboard-api:1.7.0
 crictl pull docker.io/kubernetesui/dashboard-auth:1.1.3
 crictl pull docker.io/kubernetesui/dashboard-web:1.4.0

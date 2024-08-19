@@ -1,5 +1,5 @@
-IMAGE_NAME = "skmaifujalam/k8s-1.27.4"    # Base image of VM which is vagrant box of RHEL 9 as default. generic/rhel9
-BOX_VERSION = "1.0"               # Base image version of above image as, 4.2.16
+IMAGE_NAME = "skmaifujalam/k8s-1.30.4"    # Base image of VM which is vagrant box of RHEL 9 as default. generic/rhel9
+BOX_VERSION = "2"               # Base image version of above image as, 4.2.16
 NW = 1                            # Specify the the numbers of worker VMs to create (Example:- 2,3,4)
 NM = 1                          # Specify number of master vms to create(Example:-3,4,5 but minimum 3)
 MASTER = "master"               # Name of Master VM
