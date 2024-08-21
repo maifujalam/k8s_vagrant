@@ -122,3 +122,8 @@ hello-kubernetes:-
 
 hello-kubernetes-2:-
 1. helm -n hello2 install hello2 hello-kubernetes --create-namespace
+
+Helm Package:-
+1. Build number is based on Char.yaml->version
+2. Helm package: h package hello-kubernetes
+3. 
