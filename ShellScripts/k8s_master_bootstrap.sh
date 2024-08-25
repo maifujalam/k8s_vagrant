@@ -66,9 +66,7 @@ printf "\nCooling down for 5 seconds...\n"
 ####################### Install k8s-dashboard########################
 
 printf "\nInstalling k8s Dashboard...\n"
-  su - vagrant -c 'kubectl create ns kubernetes-dashboard'
-  su - vagrant -c 'helm -n kubernetes-dashboard install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard --namespace kubernetes-dashboard'
-
+  su - vagrant -c 'helm install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --create-namespace'
 printf "\nCooling down for 5 seconds...\n"
   sleep 5
 

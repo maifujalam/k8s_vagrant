@@ -56,7 +56,7 @@ kubernetes-dashboard:
 6. helm -n kubernetes-dashboard install kubernetes-dashboard/vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
     helm install kubernetes-dashboard  kubernetes-dashboard -n kubernetes-dashboard --create-namespace
 7. helm -n kubernetes-dashboard upgrade k8s-dashboard kubernetes-dashboard
-8. helm uninstall k8s-dashboard -n kubernetes-dashboard && kubectl delete ns kubernetes-dashboard
+8. helm uninstall kubernetes-dashboard -n kubernetes-dashboard && kubectl delete ns kubernetes-dashboard
 
 kube-prometheous-stack
 1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
