@@ -66,15 +66,13 @@ printf "\nCooling down for 5 seconds...\n"
 ####################### Install k8s-dashboard########################
 
 printf "\nInstalling k8s Dashboard...\n"
-  #su - vagrant -c 'kubectl create ns kubernetes-dashboard'
-  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard'
-
+  su - vagrant -c 'helm install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --create-namespace'
 printf "\nCooling down for 5 seconds...\n"
   sleep 5
 
 ####################### Create k8s-dashboard user ########################
 printf "\n Extracting dashboard token\n"
-  su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
+  #su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
   su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user > /vagrant/dashboard_token.txt'
 
 printf "\nAppend token in kubeconfig file.\n"
@@ -100,14 +98,12 @@ printf "\nCooling down for 5 seconds...\n"
 printf "\nInstalling Local Storage Provisioner...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'
 
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
+#printf "\nCooling down for 5 seconds...\n"
+#  sleep 5
 
-printf "\nInstalling ArgoCD...\n"
-su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
+#printf "\nInstalling ArgoCD...\n"
+#su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
 
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"
   su - vagrant -c 'sh /vagrant/ShellScripts/6_configure_kubectl.sh'
