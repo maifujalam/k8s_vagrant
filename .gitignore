@@ -2,5 +2,4 @@
 *.idea
 *.box
 *.tar.gz
-*config
 **abc
