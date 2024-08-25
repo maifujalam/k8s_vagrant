@@ -1,13 +1,13 @@
 IMAGE_NAME = "skmaifujalam/k8s-1.30.4"    # Base image of VM which is vagrant box of RHEL 9 as default. generic/rhel9
 BOX_VERSION = "3"               # Base image version of above image as, 4.2.16
 NW = 1                            # Specify the the numbers of worker VMs to create (Example:- 2,3,4)
-NM = 1                          # Specify number of master vms to create(Example:-3,4,5 but minimum 3)
+NM = 2                          # Specify number of master vms to create(Example:-3,4,5 but minimum 3)
 MASTER = "master"               # Name of Master VM
 WORKER = "worker"                # Names of worker VMs(worker vms will be named as worker1,worker2,worker3 ... )
 CPU_MASTER = 4                  # Specify the CPU of master VM(Example :-1,2)
 CPU_WORKER = 2                   # Specify CPU of each worker VMs(Example :-1,2)
 MEMORY_MASTER = 4096           # Specify the RAM of master VMs in MB(Example :- 2048,4096)
-MEMORY_WORKER = 4096             # Specify the RAM of each worker VMs in MB(Example :- 2048,4096)
+MEMORY_WORKER = 2048             # Specify the RAM of each worker VMs in MB(Example :- 2048,4096)
 HDD = '20GB'                    # HDD of Each VM (Examples :- "15GB","20GB","30GB")
 
 IP_MASTER = '192.168.56.2'
