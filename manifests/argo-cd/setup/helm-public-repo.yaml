@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: public-helm-repository
+  namespace: argo-cd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: public-helm-repository
+  url: https://public-helm-repository-20231023095000508500000001.s3.ap-south-1.amazonaws.com/
+  type: helm

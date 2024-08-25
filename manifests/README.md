@@ -112,7 +112,7 @@ Argocd:
 3. helm search repo argo-cd
 4. helm pull argo/argo-cd --version 7.4.3 --untar
 5. helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd
-6. helm -n argo-cd uninstall argo-cd
+6. helm -n argo-cd uninstall argo-cd && kubectl delete ns argo-cd --force
 7. helm -n argo-cd upgrade argo-cd /vagrant/manifests/argo-cd
 
 hello-kubernetes:-
