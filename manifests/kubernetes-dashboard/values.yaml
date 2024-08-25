@@ -369,6 +369,9 @@ kong:
     type: ClusterIP
     http:
       enabled: false
+  tolerations:
+     - key: node-role.kubernetes.io/control-plane
+       effect: NoSchedule
 
 ## Optional Cert Manager sub-chart configuration
 ## Enable this if you don't already have cert-manager enabled on your cluster.
