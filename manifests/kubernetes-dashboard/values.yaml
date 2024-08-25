@@ -24,7 +24,8 @@ app:
   scheduling:
     # Node labels for pod assignment
     # Ref: https://kubernetes.io/docs/user-guide/node-selection/
-    nodeSelector: {}
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: ""
   security:
     # Allow overriding csrfKey used by API/Auth containers.
     # It has to be base64 encoded random 256 bytes string.
@@ -95,14 +96,14 @@ app:
     enabled: true
     hosts:
       # Keep 'localhost' host only if you want to access Dashboard using 'kubectl port-forward ...' on:
-      - dashboard.master.com
+      # https://localhost:8443
       - localhost
-    # - kubernetes.dashboard.domain.com
+      - dashboard.master.com
     ingressClassName: nginx
     # Use only if your ingress controllers support default ingress classes.
     # If set to true ingressClassName will be ignored and not added to the Ingress resources.
     # It should fall back to using IngressClass marked as the default.
-    useDefaultIngressClass: false
+    useDefaultIngressClass: true
     # This will append our Ingress with annotations required by our default configuration.
     #    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     #    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
@@ -130,8 +131,8 @@ app:
   # - key: node-role.kubernetes.io/control-plane
   #   effect: NoSchedule
   tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
+     - key: node-role.kubernetes.io/control-plane
+       effect: NoSchedule
   affinity: {}
 
 auth:
@@ -402,7 +403,52 @@ extras:
   #     name: additional-configmap
   #   data:
   #     mykey: myvalue
-  manifests: []
+  manifests:
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: admin-user
+        namespace: kubernetes-dashboard
+        labels:
+           app.kubernetes.io/managed-by: "Helm"
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: admin-user
+        labels:
+           app.kubernetes.io/managed-by: "Helm"
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: admin-user
+          namespace: kubernetes-dashboard
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: admin-user
+        namespace: kubernetes-dashboard
+        annotations:
+          kubernetes.io/service-account.name: "admin-user"
+      type: kubernetes.io/service-account-token
+
+  # Start in ReadOnly mode.
+  # Specifies whether cluster-wide RBAC resources (ClusterRole, ClusterRolebinding) with read only permissions to all resources listed inside the cluster should be created
+  # Only dashboard-related Secrets and ConfigMaps will still be available for writing.
+  #
+  # The basic idea of the clusterReadOnlyRole
+  # is not to hide all the secrets and sensitive data but more
+  # to avoid accidental changes in the cluster outside the standard CI/CD.
+  #
+  # It is NOT RECOMMENDED to use this version in production.
+  # Instead, you should review the role and remove all potentially sensitive parts such as
+  # access to persistentvolumes, pods/log etc.
+  clusterReadOnlyRole: false
+  # It is possible to add additional rules if read only role is enabled.
+  # This can be useful, for example, to show CRD resources.
+  clusterReadOnlyRoleAdditionalRules: []
   serviceMonitor:
     # Whether to create a Prometheus Operator service monitor.
     enabled: false
