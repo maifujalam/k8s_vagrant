@@ -104,8 +104,7 @@ app:
   # - key: node-role.kubernetes.io/control-plane
   #   effect: NoSchedule
   tolerations:
-    - key: node-role.kubernetes.io/control-plane
-      effect: NoSchedule
+dashboard.master.com
 
 # API deployment configuration
 api:

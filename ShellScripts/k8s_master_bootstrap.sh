@@ -67,14 +67,14 @@ printf "\nCooling down for 5 seconds...\n"
 
 printf "\nInstalling k8s Dashboard...\n"
   su - vagrant -c 'kubectl create ns kubernetes-dashboard'
-  su - vagrant -c 'helm -n kubernetes-dashboard install k8s-dashboard /vagrant/manifests/kubernetes-dashboard --namespace kubernetes-dashboard'
+  su - vagrant -c 'helm -n kubernetes-dashboard install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard --namespace kubernetes-dashboard'
 
 printf "\nCooling down for 5 seconds...\n"
   sleep 5
 
 ####################### Create k8s-dashboard user ########################
 printf "\n Extracting dashboard token\n"
-  su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
+  #su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
   su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user > /vagrant/dashboard_token.txt'
 
 printf "\nAppend token in kubeconfig file.\n"
