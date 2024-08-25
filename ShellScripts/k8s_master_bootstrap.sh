@@ -103,8 +103,8 @@ printf "\nInstalling Local Storage Provisioner...\n"
 printf "\nCooling down for 5 seconds...\n"
   sleep 5
 
-printf "\nInstalling ArgoCD...\n"
-su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
+#printf "\nInstalling ArgoCD...\n"
+#su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
 
 printf "\nCooling down for 5 seconds...\n"
   sleep 5
