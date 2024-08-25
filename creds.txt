@@ -1,0 +1,3 @@
+1. K8s dashboard: dashboard_token.txt
+2. argocd: Username: adminPassword: kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+3. grafana: admin/prom-operator
