@@ -65,9 +65,9 @@ Vagrant.configure("2") do |config|
             SHELL
         end
     end
-    config.trigger.after :up, type: :command do |t|
-      t.info = "Updating Kubeconfig"
-      t.run = {inline: "bash -c 'echo hostnamectl'"}
-      t.run = {path: "ShellScripts/0_configure_ssh.sh"}
-    end
+#    config.trigger.after :up, type: :command do |t|
+#      t.info = "Updating Kubeconfig"
+#      t.run = {inline: "bash -c 'echo hostnamectl'"}
+#      t.run = {path: "ShellScripts/0_configure_ssh.sh"}
+#    end
 end
