@@ -60,8 +60,8 @@ sleep 5
 printf "\nInstalling ingress-nginx...\n"
    su - vagrant -c 'helm -n ingress-nginx install ingress-nginx --create-namespace --namespace ingress-nginx /vagrant/manifests/ingress-nginx'
 
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
+printf "\nCooling down for 10 seconds...\n"
+  sleep 10
 
 ####################### Install k8s-dashboard########################
 
