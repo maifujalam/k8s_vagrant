@@ -30,13 +30,6 @@ printf "\nInstalling Calico CNI with VXLAN...\n"
 printf "\nCooling down for 5 seconds...\n"
 sleep 5
 
-####################### Install Metric Server ########################
-printf "\nInstalling metric server...\n"
-   su - vagrant -c 'helm -n kube-system install metrics-server /vagrant/manifests/metrics-server'
-
-printf "\nCooling down for 5 seconds...\n"
-sleep 5
-
 ####################### Install Kube-VIP ########################
 
 printf "\nInstalling Kube-vip...\n"
@@ -63,46 +56,53 @@ printf "\nInstalling ingress-nginx...\n"
 printf "\nCooling down for 10 seconds...\n"
   sleep 10
 
-####################### Install k8s-dashboard########################
-
-printf "\nInstalling k8s Dashboard...\n"
-  su - vagrant -c 'helm install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --create-namespace'
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
-
-####################### Create k8s-dashboard user ########################
-printf "\n Extracting dashboard token\n"
-  #su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
-  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user > /vagrant/dashboard_token.txt'
-
-printf "\nAppend token in kubeconfig file.\n"
-  su - vagrant -c 'sed -i "/client-key-data/a\    token: $(cat /vagrant/dashboard_token.txt)" /vagrant/config'
-
-printf "\nCooling down for 5 sec..\n"
-  sleep 5
-
-####################### Install Kube Prometheus Stack ########################
-printf "\nInstalling KubePrometheusStack..\n"
-  su - vagrant -c 'helm -n monitoring install kube-prometheus-stack /vagrant/manifests/kube-prometheus-stack --create-namespace'
-
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
-
-####################### Install Grafana ########################
-printf "\nInstalling Prometheus Blackbox-Exporter..\n"
-  su - vagrant -c 'helm -n monitoring install prometheus-blackbox-exporter /vagrant/manifests/prometheus-blackbox-exporter'
-
-printf "\nCooling down for 5 seconds...\n"
-  sleep 5
-
-printf "\nInstalling Local Storage Provisioner...\n"
-  su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'
+######################## Install Metric Server ########################
+#printf "\nInstalling metric server...\n"
+#   su - vagrant -c 'helm -n kube-system install metrics-server /vagrant/manifests/metrics-server'
+#
+#printf "\nCooling down for 5 seconds...\n"
+#sleep 5
+#
+######################## Install k8s-dashboard########################
+#
+#printf "\nInstalling k8s Dashboard...\n"
+#  su - vagrant -c 'helm install kubernetes-dashboard /vagrant/manifests/kubernetes-dashboard -n kubernetes-dashboard --create-namespace'
+#printf "\nCooling down for 5 seconds...\n"
+#  sleep 5
+#
+######################## Create k8s-dashboard user ########################
+#printf "\n Extracting dashboard token\n"
+#  #su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
+#  su - vagrant -c 'kubectl -n kubernetes-dashboard create token admin-user > /vagrant/dashboard_token.txt'
+#
+#printf "\nAppend token in kubeconfig file.\n"
+#  su - vagrant -c 'sed -i "/client-key-data/a\    token: $(cat /vagrant/dashboard_token.txt)" /vagrant/config'
+#
+#printf "\nCooling down for 5 sec..\n"
+#  sleep 5
+#
+######################## Install Kube Prometheus Stack ########################
+#printf "\nInstalling KubePrometheusStack..\n"
+#  su - vagrant -c 'helm -n monitoring install kube-prometheus-stack /vagrant/manifests/kube-prometheus-stack --create-namespace'
+#
+#printf "\nCooling down for 5 seconds...\n"
+#  sleep 5
+#
+######################## Install Grafana ########################
+#printf "\nInstalling Prometheus Blackbox-Exporter..\n"
+#  su - vagrant -c 'helm -n monitoring install prometheus-blackbox-exporter /vagrant/manifests/prometheus-blackbox-exporter'
+#
+#printf "\nCooling down for 5 seconds...\n"
+#  sleep 5
+#
+#printf "\nInstalling Local Storage Provisioner...\n"
+#  su - vagrant -c 'kubectl apply -f /vagrant/manifests/local-path-provisioner.yaml'
 
 #printf "\nCooling down for 5 seconds...\n"
 #  sleep 5
 
-#printf "\nInstalling ArgoCD...\n"
-#su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
+printf "\nInstalling ArgoCD...\n"
+su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
 
 ####################### Create k8s-dashboard user ########################
 printf "\nConfiguring kubectl.\n"
