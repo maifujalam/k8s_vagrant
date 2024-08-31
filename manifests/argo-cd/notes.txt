@@ -1,0 +1,4 @@
+Important:
+1. After cloning repo edit the env field fo rrepo server.
+2.Add the env alues for aws access key and secret key to pull helm chart from s3.
+  Check the image shown.
