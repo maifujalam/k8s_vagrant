@@ -2436,12 +2436,7 @@ repoServer:
   extraArgs: []
 
   # -- Environment variables to pass to repo server
-  env:   #  This secret only give specific  s3 bucket list and get permission.
-    - name: AWS_ACCESS_KEY_ID
-      value: AKIAVSYLDZZPWMM2EU66
-    - name: AWS_SECRET_ACCESS_KEY
-      value: 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
-
+  env: []  #  This secret only give specific  s3 bucket list and get permission.
   # -- envFrom to pass to repo server
   # @default -- `[]` (See [values.yaml])
   envFrom: []
