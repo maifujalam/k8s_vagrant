@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
             master.vm.hostname = MASTER
             master.vm.provision "shell", inline: <<-SHELL
                 sh /vagrant/ShellScripts/update_ssh_config.sh
-                sh /vagrant/ShellScripts/k8s_master_bootstrap.sh
+                sh /vagrant/ShellScripts/k8s_master_bootstrap_argocd.sh
             SHELL
         end
     end
