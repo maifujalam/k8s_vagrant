@@ -112,3 +112,5 @@ KUBECONFIG=../config:~/.kube/config kubectl config view --flatten | tee  ~/.kube
 echo "KUBECONFIG=new_config:~/.kube/config kubectl config view --flatten > config" > ~/.kube/update_kubeconfig.sh
 #chmod 777  ~/.kube/update_kubeconfig.sh
 ##sudo sh ~/.kube/update_kubeconfig.sh
+pass=$(kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d )
+echo admin $pass > ../argocd.cred

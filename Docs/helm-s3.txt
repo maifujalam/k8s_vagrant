@@ -1,0 +1,15 @@
+1. Install helm plugin to local: helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.16.2
+2. Create s3 bucket as public:
+3. Initialize 1st time helm repo: helm s3 init http://public-helm-repository-2023102309500050850000000
+4. Add helm repo to a local system: helm repo add public-helm-repository s3://public-helm-repository-20231023095000508500000001
+    For Pull Only:  helm repo add public-helm-repository https://public-helm-repository-20231023095000508500000001.s3.ap-south-1.amazonaws.com/
+5. Update the added helm repo: helm repo update;
+6. Push to helm repo:  helm s3 push hello-kubernetes-1.0.2.tgz public-helm-repository
+7. Pull from helm repo:  helm pull public-helm-repository/hello-kubernetes --version "1.0.2"
+8. Delete helm repo:  helm s3 delete hello-kubernetes --version 1.0.1 public-helm-repository
+9. Helm repo reindex: helm s3 reindex public-helm-repository
+10. Search in repo: helm search repo public-helm-repository
+11. For accessing s3 repo from container:-
+  a. Give s3 readonly public access trough bucket policy.
+  b. Make s3 as static website.
+  c. Inside container add: helm repo add public-helm-repository x

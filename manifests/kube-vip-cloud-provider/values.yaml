@@ -1,0 +1,45 @@
+# Default values for kube-vip-cloud-provider.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicasCount: 1
+
+image:
+  repository: ghcr.io/kube-vip/kube-vip-cloud-provider
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v0.0.10"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+  - key: node-role.kubernetes.io/control-plane
+    effect: NoSchedule
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 10
+        preference:
+          matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+      - weight: 10
+        preference:
+          matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+
+nodePool:
+  cidr-default: 192.168.56.16/28                   # CIDR-based IP range for use in the default Namespace [192.168.56.17 - 30]
+  cidr-finance: 192.168.56.32/28,192.168.56.48/28  # Multiple CIDR-based ranges for use in the finance Namespace [192.168.56.33 - 46,192.168.56.49 - 62]
+  cidr-global: 192.168.56.64/26                    # CIDR-based range which can be used in any Namespace. [192.168.56.65 - 126]
+  range-global: 192.168.56.129 - 192.168.56.190    # CIDR-based range which can be used in any Namespace [ Range inclusive]

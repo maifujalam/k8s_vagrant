@@ -2436,8 +2436,7 @@ repoServer:
   extraArgs: []
 
   # -- Environment variables to pass to repo server
-  env: []
-
+  env: []  #  This secret only give specific  s3 bucket list and get permission.
   # -- envFrom to pass to repo server
   # @default -- `[]` (See [values.yaml])
   envFrom: []
@@ -2495,7 +2494,30 @@ repoServer:
     #       name: cmp-tmp
 
   # -- Init containers to add to the repo server pods
-  initContainers: []
+  initContainers:
+    - name: helm-aws-s3
+      image: alpine/helm:3.15.4
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - name: helm-working-dir
+          mountPath: /helm-working-dir
+
+      env:
+        - name: HELM_CACHE_HOME
+          value: /helm-working-dir
+        - name: HELM_CONFIG_HOME
+          value: /helm-working-dir
+        - name: HELM_DATA_HOME
+          value: /helm-working-dir
+      command: [ "/bin/sh", "-c" ]
+      args:
+        - apk --no-cache add curl;
+          helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.16.2;
+          rm -rf /helm-working-dir/plugins/https-github.com-hypnoglow-helm-s3.git;
+          helm repo add public-helm-repository https://public-helm-repository-20231023095000508500000001.s3.ap-south-1.amazonaws.com/;
+          helm repo update;
 
   # -- Additional volumeMounts to the repo server main container
   volumeMounts: []
