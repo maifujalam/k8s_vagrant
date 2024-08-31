@@ -59,8 +59,6 @@ su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --cr
 printf "\nInstalling Argocd Apps ...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/default-applications.yaml'
 
-
-printf "\nCooling down for 10 sec..\n"
-  sleep 10
-
+printf "Removing obsoleted helm chart"
+  su - vagrant -c 'sh /vagrant/ShellScripts/delete_helm_release.sh'
 
