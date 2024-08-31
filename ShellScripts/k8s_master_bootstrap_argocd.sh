@@ -61,7 +61,3 @@ printf "\nInstalling Argocd Apps ...\n"
 
 #printf "\nCooling down for 20 seconds...\n"
 #  sleep 20
-
-#printf "Removing obsoleted helm chart"
-#  su - vagrant -c 'sh /vagrant/ShellScripts/delete_helm_release.sh'
-#
