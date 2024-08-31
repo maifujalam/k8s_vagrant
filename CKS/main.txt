@@ -1,3 +1,0 @@
-1. OPA polict:
-    a. No need to learn how to write OPA policy file.
-    b.
