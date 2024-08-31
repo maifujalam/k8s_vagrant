@@ -54,7 +54,7 @@ printf "\nCooling down for 10 seconds...\n"
 
 ######################## Install Argocd ########################
 printf "\nInstalling ArgoCD...\n"
-su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd'
+su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd-7.4.3.tgz --create-namespace --namespace argo-cd'
 
 printf "\nInstalling Argocd Apps ...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/default-applications.yaml'

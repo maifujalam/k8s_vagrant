@@ -2,3 +2,13 @@ Important:
 1. After cloning repo edit the env field fo rrepo server.
 2.Add the env alues for aws access key and secret key to pull helm chart from s3.
   Check the image shown.
+  The rror code for the issue is:
+  Failed to load target state: failed to generate manifest for source 1 of 1: rpc error:
+   code = Unknown desc = `helm pull --destination /tmp/c991f666-e7ff-4c5c-8d39-35af133c6bef --version v1.15.3
+   --repo https://public-helm-repository-20231023095000508500000001.s3.ap-south-1.amazonaws.com/ cert-manager`
+    failed exit status 1: Error: fetch from s3 url=s3://public-helm-repository-20231023095000508500000001/
+    cert-manager-v1.15.3.tgz: fetch object from s3: NoCredentialProviders: no valid providers in chain. Deprecated.
+     For verbose messaging see aws.Config.CredentialsChainVerboseErrors Error: plugin "bin/helm-s3 download" exited
+     with error
+ 3. OR Download the prepackeged from helm repo:
+    helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd-7.4.3.tgz --create-namespace --namespace argo-cd
