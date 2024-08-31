@@ -4,3 +4,4 @@
 *.tar.gz
 **abc
 /configs/.aws
+**manifests/argo-cd/values.yaml
