@@ -59,5 +59,4 @@ su - vagrant -c 'helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd-7.4.
 printf "\nInstalling Argocd Apps ...\n"
   su - vagrant -c 'kubectl apply -f /vagrant/manifests/default-applications.yaml'
 
-#printf "\nCooling down for 20 seconds...\n"
-#  sleep 20
+printf "\n-------K8s master Initialized Successfully-----\n"
