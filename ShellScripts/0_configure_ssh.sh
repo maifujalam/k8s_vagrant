@@ -112,5 +112,13 @@ KUBECONFIG=../config:~/.kube/config kubectl config view --flatten | tee  ~/.kube
 echo "KUBECONFIG=new_config:~/.kube/config kubectl config view --flatten > config" > ~/.kube/update_kubeconfig.sh
 #chmod 777  ~/.kube/update_kubeconfig.sh
 ##sudo sh ~/.kube/update_kubeconfig.sh
+printf "\nExtract argo-cd credentials"
 pass=$(kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d )
 echo admin $pass > ../argocd.cred
+
+printf "\nExtracting dashboard token\n"
+  #su - vagrant -c 'kubectl apply -f /vagrant/manifests/kubernetes-dashboard/dashboard-admin-user.yaml'
+  kubectl -n kubernetes-dashboard create token admin-user > ../dashboard_token.txt
+
+printf "\nAppend token in kubeconfig file.\n"
+ sed -i "/client-key-data/a\    token: $(cat ../dashboard_token.txt)" ../config
