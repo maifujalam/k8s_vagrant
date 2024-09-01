@@ -63,7 +63,8 @@ kube-prometheous-stack
 2. helm repo update
 3. helm search repo kube-prometheus-stack
 4. helm pull prometheus-community/kube-prometheus-stack --version=61.8.0 --untar
-5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace
+5. helm -n monitoring install kube-prometheus-stack kube-prometheus-stack --create-namespace OR
+   helm -n monitoring install kube-prometheus-stack public-helm-repository/kube-prometheus-stack --create-namespace
 6. helm -n monitoring uninstall kube-prometheus-stack
 7. helm -n monitoring upgrade kube-prometheus-stack kube-prometheus-stack 
 8. Creds: admin/prom-operator [ k -n monitoring get secret kube-prometheus-stack-grafana --template='{{ index .data "admin-password" | base64decode}}' ]
@@ -111,7 +112,7 @@ Argocd:
 2. helm repo update
 3. helm search repo argo-cd
 4. helm pull argo/argo-cd --version 7.4.3 --untar
-5. helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace --namespace argo-cd
+5. helm -n argo-cd install argo-cd /vagrant/manifests/argo-cd --create-namespace ls argo-cd
 6. helm -n argo-cd uninstall argo-cd && kubectl delete ns argo-cd --force
 7. helm -n argo-cd upgrade argo-cd /vagrant/manifests/argo-cd
 
@@ -122,6 +123,15 @@ hello-kubernetes:-
 
 hello-kubernetes-2:-
 1. helm -n hello2 install hello2 hello-kubernetes --create-namespace
+
+Rancher Local path provisioner: -
+1. helm repo add eugenmayer https://eugenmayer.github.io/helm-charts/
+2. helm search repo localpath
+3. helm pull eugenmayer/localpath --version 1.2.0
+4. helm -n local-path-storage install local-path-storage public-helm-repository/localpath --version=1.2.0 --create-namespace --namespace local-path-storage
+   helm install local-path-storage public-helm-repository/localpath --version=1.2.0
+5. helm -n local-path-storage upgrade local-path-storage public-helm-repository/localpath --version=1.2.0
+
 
 Helm Package:-
 1. Build number is based on Char.yaml->version
