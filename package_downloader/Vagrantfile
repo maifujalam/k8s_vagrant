@@ -36,5 +36,4 @@ Vagrant.configure("2") do |config|
         #sh /vagrant/ShellScripts/download-packages.sh
         #sh /vagrant/ShellScripts/unregister_system_redhat.sh
     SHELL
-
 end
