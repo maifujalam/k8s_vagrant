@@ -17,7 +17,7 @@ gpgcheck=1
 gpgkey=https://pkgs.kubernetes.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 EOF
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum update && sudo yum upgrade
+sudo yum -y update && sudo yum -y upgrade
 sudo yum clean all
 
 
