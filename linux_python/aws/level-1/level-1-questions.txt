@@ -1,0 +1,5 @@
+1. Script to ssh to host:- password based,key based
+2. Script to Start a host on AWS
+3. Script to Reboot Host on AWS
+4. Script to Reboot Host on AWS
+5. Script to run linux binary on host
