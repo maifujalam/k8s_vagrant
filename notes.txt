@@ -43,3 +43,7 @@
   c. h pull metrics-server/metrics-server --version 3.10.0 --untar
   d. h install metricserver metrics-server -n kube-system
   e. h list ,h status metricserver
+10. Setup kubeconfig on windows-11:
+    a. winget install k9s
+    b. export env variable as KUBECONFIG to path of kubeconfig_file.
+11.
